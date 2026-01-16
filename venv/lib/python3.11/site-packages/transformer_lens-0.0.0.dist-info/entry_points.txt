@@ -1,0 +1,4 @@
+[console_scripts]
+build-docs=docs.make_docs:build_docs
+docs-hot-reload=docs.make_docs:docs_hot_reload
+

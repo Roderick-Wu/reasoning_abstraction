@@ -1,0 +1,51 @@
+displacement, extension, stretch
+The spring's displacement was proportional to the applied force.
+The seismograph recorded the ground displacement during the earthquake.
+The piston's displacement in the cylinder determined the engine's volume.
+The material's elastic displacement returned to zero after unloading.
+The displacement of the oscillator was measured with a laser interferometer.
+The ship's displacement in water equaled the weight of water it pushed aside.
+The displacement vector pointed from the initial to the final position.
+The cantilever's displacement at the tip was calculated using beam theory.
+The displacement transducer measured the position with micrometer accuracy.
+The thermal displacement of the bridge deck had to be accommodated.
+The displacement of the pendulum bob decreased as friction dissipated energy.
+The membrane's displacement created sound waves in the air.
+The displacement of the fault line during the quake was several meters.
+The actuator's displacement was controlled by the input voltage.
+The displacement amplitude of the vibrating string determined its loudness.
+The plastic displacement remained after the stress was removed.
+The displacement of the liquid in the graduated cylinder indicated the volume.
+The micrometer measured the displacement of the machine tool.
+The displacement of the soil caused cracks in the foundation.
+The maximum displacement of the shock absorber was limited by its travel.
+The displacement sensor detected sub-nanometer movements.
+The tidal displacement of the ocean surface followed lunar cycles.
+The displacement of the plate tectonics occurred over millions of years.
+The displacement mode of the resonator was visualized using holography.
+The angular displacement of the shaft was measured by the encoder.
+The linear displacement actuator extended by 50 millimeters.
+The displacement field in the deformed material was computed using finite elements.
+The displacement of air by the speaker cone created the sound pressure.
+The vertical displacement of the building during the earthquake was recorded.
+The displacement of the slider in the mechanism was constrained by guides.
+The radial displacement of the turbine blade under load was measured.
+The displacement boundary condition specified zero motion at the fixed end.
+The relative displacement between the surfaces caused wear.
+The displacement of the center of mass was calculated from the motion.
+The elastic band's extension was limited to prevent permanent deformation.
+The spring's extension increased linearly with the hanging mass.
+The rope's extension under tension was measured in millimeters.
+The polymer chain's extension was studied at the molecular level.
+The muscle fiber's extension was restricted by its connective tissue.
+The extensometer measured the extension of the specimen during testing.
+The bungee cord's extension absorbed the jumper's kinetic energy.
+The tendon's extension stored elastic energy during the movement.
+The extension of the telescope allowed viewing of distant objects.
+The thermal extension of the metal rod was calculated from its temperature change.
+The maximum extension of the spring was specified by the manufacturer.
+The extension ladder reached a height of 20 feet when fully extended.
+The rubber band's extension demonstrated Hooke's law up to a point.
+The extension of the hydraulic cylinder was 300 millimeters.
+The stretch of the elastic fabric allowed for a comfortable fit.
+The stretch reflex protected the muscle from excessive extension.

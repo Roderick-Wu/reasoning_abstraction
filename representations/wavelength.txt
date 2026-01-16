@@ -1,0 +1,51 @@
+wavelength, lambda, distance
+The wavelength of red light is longer than that of blue light.
+The physicist measured the wavelength using a diffraction grating.
+Radio waves have wavelengths ranging from millimeters to kilometers.
+The wavelength determined which color appeared in the visible spectrum.
+The antenna's length was designed to be one-quarter of the signal's wavelength.
+The wavelength of the sound wave affected its pitch and frequency.
+X-rays have extremely short wavelengths compared to visible light.
+The wavelength of the laser was precisely 632.8 nanometers.
+The water wave's wavelength was the distance between successive crests.
+The wavelength of ultraviolet light is shorter than visible light.
+The spectroscope separated light into its component wavelengths.
+The wavelength of infrared radiation is longer than visible light.
+The de Broglie wavelength of the electron was calculated from its momentum.
+The wavelength of the electromagnetic wave determined its energy.
+The wavelength of gamma rays is measured in picometers.
+The standing wave pattern showed nodes separated by half a wavelength.
+The wavelength of the microwave in the oven was about 12 centimeters.
+The optical fiber was designed for specific wavelengths of light.
+The wavelength of the acoustic wave determined its ability to diffract around obstacles.
+The wavelength of the radio broadcast was 300 meters at 1 MHz.
+The photon's energy was inversely proportional to its wavelength.
+The wavelength of the seismic wave indicated the depth of the earthquake.
+The wavelength of the carrier wave was modulated to transmit information.
+The resonant wavelength of the cavity matched the laser output.
+The wavelength of the ocean swell was estimated at 200 meters.
+The wavelength shift indicated the Doppler effect from the moving source.
+The wavelength of the plasma oscillation was measured spectroscopically.
+The cut-off wavelength of the photoelectric effect depended on the metal's work function.
+The wavelength of the matter wave exhibited quantum mechanical behavior.
+The wavelength of the thermal radiation peaked according to Wien's law.
+The wavelength of the guided wave in the waveguide was determined by its dimensions.
+The wavelength of the Bragg reflection matched the crystal lattice spacing.
+The wavelength of the beat frequency was the difference between the two waves.
+The wavelength of the gravitational wave was millions of kilometers long.
+The wavelength of the fluorescent emission was longer than the absorbed light.
+The wavelength of the phonon in the crystal lattice affected its thermal properties.
+The wavelength of the ripple tank demonstration was clearly visible.
+The wavelength of the harmonics were integer divisions of the fundamental.
+The wavelength of the Compton scattering changed after interaction with the electron.
+The wavelength of the synchrotron radiation was tunable by adjusting the magnetic field.
+The wavelength of the evanescent wave decayed exponentially beyond the interface.
+The wavelength of the parametric oscillator was half that of the pump laser.
+The wavelength of the soliton remained constant as it propagated.
+The wavelength of the capillary wave on the liquid surface was millimeters long.
+The wavelength of the magnon in the magnetic material was related to the spin waves.
+The wavelength of the surface plasmon resonance was sensitive to the surrounding medium.
+The wavelength of the whispering gallery mode circled the resonator's circumference.
+The wavelength of the Raman scattered light was shifted from the incident beam.
+The wavelength of the polariton was a hybrid of light and matter waves.
+The wavelength of the acoustic phonon determined the speed of sound in the solid.

@@ -1,0 +1,51 @@
+radius, radii, distance
+The circle's radius extended from the center point to any point on its circumference.
+The engineer measured the radius of the wheel to calculate its circumference.
+The astronomer calculated the planet's radius using gravitational measurements.
+The sphere's radius was half the length of its diameter.
+The tornado's radius of destruction extended for miles from its center.
+The radius of the circular garden determined how much fencing we needed.
+The compass was set to a radius of 5 centimeters to draw the perfect circle.
+The bacterial colony grew outward with an increasing radius over time.
+The blast radius of the explosion was estimated at 500 meters.
+The radius of curvature of the lens affected its focal length.
+The turning radius of the truck limited which streets it could navigate.
+The scanning electron microscope measured the radius of the nanoparticle.
+The radius of the pipe determined its cross-sectional area and flow capacity.
+The satellite's orbital radius around Earth was precisely calculated.
+The ripple's radius expanded outward from where the stone hit the water.
+The pizza had a radius of 12 inches, making it a 24-inch diameter pie.
+The radius of the atom was measured in angstroms.
+The searchlight's effective radius illuminated objects up to 2 kilometers away.
+The radius of the cylindrical tank was used to calculate its volume.
+The architect specified the radius for the curved wall of the building.
+The black hole's event horizon radius depends on its mass.
+The radius of the circular track was measured from its center to the inner lane.
+The radius vector pointed from the origin to the particle's position.
+The hemispherical dome had a radius of 15 meters.
+The radius of the drill bit determined the size of the hole it created.
+The signal's broadcast radius reached listeners within a 50-mile area.
+The radius of the tire affected the car's speedometer reading.
+The neutron star's radius was only about 10 kilometers despite its massive density.
+The radius of the circular saw blade was 7.5 inches.
+The geologist measured the radius of the circular impact crater.
+The radius of the round table was 3 feet, seating eight people comfortably.
+The radius of gyration described how the mass was distributed around the axis.
+The ball bearing's radius was machined to within a micrometer of tolerance.
+The cone's base radius was twice its height.
+The radius of the circular orbit determined the satellite's period.
+The physicist calculated the Bohr radius of the hydrogen atom.
+The radius of the cylindrical column supported the building's weight.
+The radar's detection radius extended 100 nautical miles.
+The radius of the spherical balloon increased as it was inflated.
+The minimum turning radius of the aircraft was specified in the manual.
+The radius of the circular coil determined its inductance.
+The hydraulic cylinder's radius affected the force it could exert.
+The radius of the cam determined the valve's lift profile.
+The Schwarzschild radius defined the boundary of the black hole.
+The radius of the circular pool was 10 feet from center to edge.
+The optical fiber's core radius was only 9 micrometers.
+The radius of the ring gear meshed with the pinion gear.
+The torsion spring's active radius determined its spring constant.
+The radius of the pressure vessel was limited by material strength.
+The effective radius of the electron cloud around the nucleus was calculated.

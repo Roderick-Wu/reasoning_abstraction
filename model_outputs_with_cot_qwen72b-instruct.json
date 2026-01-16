@@ -1,0 +1,3002 @@
+[
+  {
+    "example_id": 0,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 30.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 215 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.465616732800196,
+      "time_s": 3.54374653931171
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 215 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.49<|im_end|>"
+  },
+  {
+    "example_id": 1,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 140.0,
+      "distance_m": 60.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 140 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.831300510639732,
+      "time_s": 8.7831006565368
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 140 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 2,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 50.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 20 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.1622776601683795,
+      "time_s": 15.811388300841896
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 20 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 3,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 40.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 25 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.0,
+      "time_s": 8.0
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 25 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4<|im_end|>"
+  },
+  {
+    "example_id": 4,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 15.0,
+      "distance_m": 80.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 15 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.8257418583505538,
+      "time_s": 43.81780460041329
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 15 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n40<|im_end|>"
+  },
+  {
+    "example_id": 5,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 90.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg rocket has 20 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.1622776601683795,
+      "time_s": 28.46049894151541
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg rocket has 20 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 6,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 15.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg rocket has 15 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.7386127875258306,
+      "time_s": 7.302967433402215
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg rocket has 15 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.45<|im_end|>"
+  },
+  {
+    "example_id": 7,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 155.0,
+      "distance_m": 100.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg mass has 155 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.874007874011811,
+      "time_s": 12.70001270001905
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg mass has 155 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.295630140987074<|im_end|>"
+  },
+  {
+    "example_id": 8,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 85.0,
+      "distance_m": 70.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg vehicle has 85 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.32290647422377,
+      "time_s": 13.15071011278814
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg vehicle has 85 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.2941176471<|im_end|>"
+  },
+  {
+    "example_id": 9,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 50.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 215 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.36822067666386,
+      "time_s": 4.822428221704121
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 215 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.64<|im_end|>"
+  },
+  {
+    "example_id": 10,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 65.0,
+      "distance_m": 70.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 65 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.80058475033046,
+      "time_s": 18.41821840544761
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 65 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.77<|im_end|>"
+  },
+  {
+    "example_id": 11,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 195.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 195 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 13.96424004376894,
+      "time_s": 7.161148740394329
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 195 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.256410256410256<|im_end|>"
+  },
+  {
+    "example_id": 12,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 40.0,
+      "distance_m": 100.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 40 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.163977794943222,
+      "time_s": 19.364916731037084
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 40 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 13,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 80.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 150 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.745966692414834,
+      "time_s": 10.327955589886445
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 150 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n40<|im_end|>"
+  },
+  {
+    "example_id": 14,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 90.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 20 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.390457218668787,
+      "time_s": 37.649701194033405
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 20 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 15,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 100.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 95 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.594682917363407,
+      "time_s": 21.764287503300352
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 95 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.54<|im_end|>"
+  },
+  {
+    "example_id": 16,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 70.0,
+      "distance_m": 90.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.9440531887330774,
+      "time_s": 22.819164877669948
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.295630140987007<|im_end|>"
+  },
+  {
+    "example_id": 17,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 100.0,
+      "distance_m": 60.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg plane has 100 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.324555320336759,
+      "time_s": 9.486832980505138
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg plane has 100 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n12<|im_end|>"
+  },
+  {
+    "example_id": 18,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 20.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 220 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.99205898780101,
+      "time_s": 2.860387767736777
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 220 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 19,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 40.0,
+      "distance_m": 40.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 40 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.3806170189140663,
+      "time_s": 11.832159566199232
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 40 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n20<|im_end|>"
+  },
+  {
+    "example_id": 20,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 100.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 220 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 14.832396974191326,
+      "time_s": 6.741998624632421
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 220 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 21,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 40.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg ball has 165 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.416198487095663,
+      "time_s": 5.393598899705936
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg ball has 165 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.56<|im_end|>"
+  },
+  {
+    "example_id": 22,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 5.0,
+      "distance_m": 60.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 5 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.0540925533894598,
+      "time_s": 56.92099788303082
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 5 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n12.99<|im_end|>"
+  },
+  {
+    "example_id": 23,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 195.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 195 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.06225774829855,
+      "time_s": 12.403473458920846
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 195 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.295630140987074<|im_end|>"
+  },
+  {
+    "example_id": 24,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 70.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.0553007081949835,
+      "time_s": 11.560119533826786
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.954451150103324<|im_end|>"
+  },
+  {
+    "example_id": 25,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 15.0,
+      "distance_m": 60.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 15 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.9364916731037085,
+      "time_s": 30.983866769659333
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 15 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 26,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 40.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg mass has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.366600265340756,
+      "time_s": 4.780914437337574
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg mass has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n7.75<|im_end|>"
+  },
+  {
+    "example_id": 27,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 45.0,
+      "distance_m": 30.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 45 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.3541019662496847,
+      "time_s": 8.94427190999916
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 45 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.872983346207417<|im_end|>"
+  },
+  {
+    "example_id": 28,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 10.0,
+      "distance_m": 50.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg car has 10 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.581988897471611,
+      "time_s": 19.364916731037084
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg car has 10 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 29,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 70.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 220 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.928249671720919,
+      "time_s": 8.829187134416477
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 220 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 30,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 135.0,
+      "distance_m": 10.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 135 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.486832980505138,
+      "time_s": 1.0540925533894598
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 135 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3<|im_end|>"
+  },
+  {
+    "example_id": 31,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 55.0,
+      "distance_m": 50.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 55 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.496029493900505,
+      "time_s": 14.301938838683885
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 55 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.099504938362078<|im_end|>"
+  },
+  {
+    "example_id": 32,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 135.0,
+      "distance_m": 100.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 135 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.215838362577491,
+      "time_s": 12.171612389003691
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 135 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 33,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 120.0,
+      "distance_m": 100.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg ball has 120 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.163977794943222,
+      "time_s": 19.364916731037084
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg ball has 120 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 34,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 70.0,
+      "distance_m": 40.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 70 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.916079783099616,
+      "time_s": 6.761234037828133
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 70 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 35,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 100.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg train has 150 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.773502691896258,
+      "time_s": 17.32050807568877
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg train has 150 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 36,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 160.0,
+      "distance_m": 70.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 160 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.962847939999439,
+      "time_s": 11.739356881873896
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 160 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.65<|im_end|>"
+  },
+  {
+    "example_id": 37,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 35.0,
+      "distance_m": 70.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 35 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.415650255319866,
+      "time_s": 20.493901531919196
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 35 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 38,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 10.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 215 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.972189997378647,
+      "time_s": 0.8352690695845568
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 215 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.64<|im_end|>"
+  },
+  {
+    "example_id": 39,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 125.0,
+      "distance_m": 60.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 125 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.180339887498949,
+      "time_s": 5.366563145999495
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 125 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5<|im_end|>"
+  },
+  {
+    "example_id": 40,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 35.0,
+      "distance_m": 10.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 35 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.788866755113585,
+      "time_s": 3.585685828003181
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 35 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.857142857142857<|im_end|>"
+  },
+  {
+    "example_id": 41,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 20.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 50 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.08248290463863,
+      "time_s": 4.898979485566356
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 50 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 42,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 10.0,
+      "distance_m": 100.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 10 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.5811388300841898,
+      "time_s": 63.245553203367585
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 10 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14.142135623730951<|im_end|>"
+  },
+  {
+    "example_id": 43,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 50.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 130 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.40175425099138,
+      "time_s": 4.3852900965351465
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 130 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 44,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 90.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.749485577105529,
+      "time_s": 13.33434955476946
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n13.4<|im_end|>"
+  },
+  {
+    "example_id": 45,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 80.0,
+      "distance_m": 10.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 80 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.94427190999916,
+      "time_s": 1.118033988749895
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 80 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4<|im_end|>"
+  },
+  {
+    "example_id": 46,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 20.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 95 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.209880722517277,
+      "time_s": 3.8388594797495723
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 95 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.36<|im_end|>"
+  },
+  {
+    "example_id": 47,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 210.0,
+      "distance_m": 50.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 210 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.245688373094719,
+      "time_s": 6.900655593423543
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 210 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.54<|im_end|>"
+  },
+  {
+    "example_id": 48,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 110 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.944132324730441,
+      "time_s": 20.225995873897265
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 110 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.49<|im_end|>"
+  },
+  {
+    "example_id": 49,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 70.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 14.317821063276353,
+      "time_s": 4.889012070387047
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.246950775974849<|im_end|>"
+  },
+  {
+    "example_id": 50,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 30.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 25 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.6726124191242437,
+      "time_s": 11.224972160321824
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 25 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n6<|im_end|>"
+  },
+  {
+    "example_id": 51,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 90.0,
+      "distance_m": 60.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 90 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.486832980505138,
+      "time_s": 6.324555320336758
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 90 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 52,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 80.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.422616289332565,
+      "time_s": 12.455983106584368
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 53,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 15.0,
+      "distance_m": 80.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 15 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.0701966780270626,
+      "time_s": 38.64367132317184
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 15 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n40<|im_end|>"
+  },
+  {
+    "example_id": 54,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 45.0,
+      "distance_m": 10.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 45 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.708203932499369,
+      "time_s": 1.4907119849998598
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 45 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3<|im_end|>"
+  },
+  {
+    "example_id": 55,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 80.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 170 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.52772652709081,
+      "time_s": 10.627378626481145
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 170 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.24<|im_end|>"
+  },
+  {
+    "example_id": 56,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 50.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.488088481701515,
+      "time_s": 4.767312946227961
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 57,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 80.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.563488385776752,
+      "time_s": 9.341987329938275
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.216370213562175<|im_end|>"
+  },
+  {
+    "example_id": 58,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 180.0,
+      "distance_m": 70.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg ball has 180 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.48528137423857,
+      "time_s": 8.249579113843055
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg ball has 180 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 59,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 30.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.06225774829855,
+      "time_s": 3.721042037676254
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.77<|im_end|>"
+  },
+  {
+    "example_id": 60,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 90.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 50 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.0,
+      "time_s": 18.0
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 50 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 61,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 80.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 215 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.972189997378647,
+      "time_s": 6.682152556676455
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 215 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.24<|im_end|>"
+  },
+  {
+    "example_id": 62,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 90.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.416198487095663,
+      "time_s": 12.135597524338358
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 110 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 63,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 40.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 205 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.124228365658293,
+      "time_s": 3.9509183865983584
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 205 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.125<|im_end|>"
+  },
+  {
+    "example_id": 64,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 210.0,
+      "distance_m": 70.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg plane has 210 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.745966692414834,
+      "time_s": 9.03696114115064
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg plane has 210 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 65,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 75.0,
+      "distance_m": 10.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 75 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.330127018922194,
+      "time_s": 2.309401076758503
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 75 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.45<|im_end|>"
+  },
+  {
+    "example_id": 66,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 80.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 170 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.519202405202649,
+      "time_s": 12.271439821557927
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 170 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.24<|im_end|>"
+  },
+  {
+    "example_id": 67,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 180.0,
+      "distance_m": 80.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 180 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.708203932499369,
+      "time_s": 11.925695879998878
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 180 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 68,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 80.0,
+      "distance_m": 100.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 80 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.163977794943222,
+      "time_s": 19.364916731037084
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 80 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 69,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 170 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.52772652709081,
+      "time_s": 2.656844656620286
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 170 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.58<|im_end|>"
+  },
+  {
+    "example_id": 70,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 100.0,
+      "distance_m": 90.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 100 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.3452248382484875,
+      "time_s": 16.837458240482736
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 100 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 71,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 90.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 95 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.164414002968976,
+      "time_s": 14.599927901768629
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 95 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 72,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 125.0,
+      "distance_m": 10.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 125 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.5901699437494745,
+      "time_s": 1.7888543819998317
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 125 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5<|im_end|>"
+  },
+  {
+    "example_id": 73,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 30.0,
+      "distance_m": 100.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 30 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.1622776601683795,
+      "time_s": 31.622776601683793
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 30 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 74,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 75.0,
+      "distance_m": 80.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 75 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.123724356957945,
+      "time_s": 13.063945294843617
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 75 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 75,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 35.0,
+      "distance_m": 90.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg rocket has 35 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.7416573867739413,
+      "time_s": 24.053511772118195
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg rocket has 35 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n6<|im_end|>"
+  },
+  {
+    "example_id": 76,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 80.0,
+      "distance_m": 90.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 80 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.94427190999916,
+      "time_s": 10.062305898749052
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 80 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n15<|im_end|>"
+  },
+  {
+    "example_id": 77,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 120.0,
+      "distance_m": 80.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 120 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.94427190999916,
+      "time_s": 8.94427190999916
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 120 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 78,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 80.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 215 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.837638128197259,
+      "time_s": 10.207156632070848
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 215 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.49<|im_end|>"
+  },
+  {
+    "example_id": 79,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 30.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 220 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.416198487095663,
+      "time_s": 4.0451991747794525
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 220 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.19<|im_end|>"
+  },
+  {
+    "example_id": 80,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 210.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 210 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.366600265340756,
+      "time_s": 11.952286093343936
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 210 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 81,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 100.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 215 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.33143914930759,
+      "time_s": 13.63988678940947
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg ball has 215 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.64<|im_end|>"
+  },
+  {
+    "example_id": 82,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 50.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 130 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.374838498865699,
+      "time_s": 9.302605094190636
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 130 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.2<|im_end|>"
+  },
+  {
+    "example_id": 83,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 75.0,
+      "distance_m": 20.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 75 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.0710678118654755,
+      "time_s": 2.82842712474619
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 75 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 84,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 30.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 215 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.837638128197259,
+      "time_s": 3.827683737026568
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 215 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.49<|im_end|>"
+  },
+  {
+    "example_id": 85,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 5.0,
+      "distance_m": 70.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 5 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.23606797749979,
+      "time_s": 31.304951684997054
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 5 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14<|im_end|>"
+  },
+  {
+    "example_id": 86,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 200.0,
+      "distance_m": 30.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 200 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 14.142135623730951,
+      "time_s": 2.1213203435596424
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 200 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 87,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 125.0,
+      "distance_m": 80.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 125 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.180339887498949,
+      "time_s": 7.155417527999327
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 125 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4<|im_end|>"
+  },
+  {
+    "example_id": 88,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 100.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 50 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.773502691896258,
+      "time_s": 17.32050807568877
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 50 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 89,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 55.0,
+      "distance_m": 70.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 55 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.7080992435478315,
+      "time_s": 18.877596148970778
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 55 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.49<|im_end|>"
+  },
+  {
+    "example_id": 90,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 160.0,
+      "distance_m": 20.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg vehicle has 160 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.302967433402215,
+      "time_s": 2.7386127875258306
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg vehicle has 160 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.08248290463863<|im_end|>"
+  },
+  {
+    "example_id": 91,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 15.0,
+      "distance_m": 20.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 15 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.7386127875258306,
+      "time_s": 7.302967433402215
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 15 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.582<|im_end|>"
+  },
+  {
+    "example_id": 92,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 80.0,
+      "distance_m": 20.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 80 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.94427190999916,
+      "time_s": 2.23606797749979
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg plane has 80 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4<|im_end|>"
+  },
+  {
+    "example_id": 93,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 85.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 85 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.52772652709081,
+      "time_s": 13.28422328310143
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 85 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n11.55<|im_end|>"
+  },
+  {
+    "example_id": 94,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 100.0,
+      "distance_m": 30.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 100 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.324555320336759,
+      "time_s": 4.743416490252569
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 100 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n6<|im_end|>"
+  },
+  {
+    "example_id": 95,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 215.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg car has 215 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.36822067666386,
+      "time_s": 9.644856443408242
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg car has 215 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.2<|im_end|>"
+  },
+  {
+    "example_id": 96,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 80.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 95 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.958224257542215,
+      "time_s": 10.052493799000692
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 95 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.24<|im_end|>"
+  },
+  {
+    "example_id": 97,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 60.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 95 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.627314338711377,
+      "time_s": 10.662279799663663
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 95 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n12.37<|im_end|>"
+  },
+  {
+    "example_id": 98,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 180.0,
+      "distance_m": 10.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 180 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.324555320336759,
+      "time_s": 1.5811388300841895
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 180 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.5<|im_end|>"
+  },
+  {
+    "example_id": 99,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 25 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.886751345948129,
+      "time_s": 34.64101615137754
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg car has 25 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 100,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 135.0,
+      "distance_m": 30.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 135 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.61895003862225,
+      "time_s": 2.581988897471611
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 135 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 101,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 140.0,
+      "distance_m": 60.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 140 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.832159566199232,
+      "time_s": 5.0709255283711
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 140 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.954451150103324<|im_end|>"
+  },
+  {
+    "example_id": 102,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 5.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 5 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.8257418583505538,
+      "time_s": 10.954451150103322
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 5 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4<|im_end|>"
+  },
+  {
+    "example_id": 103,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 10.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 105 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.123475382979799,
+      "time_s": 1.9518001458970664
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg train has 105 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.74<|im_end|>"
+  },
+  {
+    "example_id": 104,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 80.0,
+      "distance_m": 70.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 80 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.216370213557839,
+      "time_s": 16.60195771588399
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 80 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 105,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 10.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg rocket has 10 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 1.6903085094570331,
+      "time_s": 11.832159566199232
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg rocket has 10 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 106,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 90.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 25 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.6726124191242437,
+      "time_s": 33.67491648096547
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 25 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n6<|im_end|>"
+  },
+  {
+    "example_id": 107,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 55.0,
+      "distance_m": 50.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg ball has 55 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.9641248358604595,
+      "time_s": 12.613124477737825
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg ball has 55 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.1<|im_end|>"
+  },
+  {
+    "example_id": 108,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 100.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 130 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 11.40175425099138,
+      "time_s": 8.770580193070293
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 130 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 109,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 30.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.06225774829855,
+      "time_s": 3.721042037676254
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.77<|im_end|>"
+  },
+  {
+    "example_id": 110,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 180.0,
+      "distance_m": 40.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 180 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.171371656006362,
+      "time_s": 5.57773351022717
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 180 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 111,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 60.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 20 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.1081851067789197,
+      "time_s": 28.46049894151541
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg plane has 20 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 112,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 100.0,
+      "distance_m": 30.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 100 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.714045207910317,
+      "time_s": 6.363961030678928
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 100 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.477225575051661<|im_end|>"
+  },
+  {
+    "example_id": 113,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 45.0,
+      "distance_m": 30.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 45 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.3541019662496847,
+      "time_s": 8.94427190999916
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 45 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 114,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 145.0,
+      "distance_m": 70.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 145 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.436503043467892,
+      "time_s": 10.875470659652644
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 145 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 115,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 115.0,
+      "distance_m": 50.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 115 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.755950357709132,
+      "time_s": 5.710402407201607
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 115 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.47<|im_end|>"
+  },
+  {
+    "example_id": 116,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 40.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.366600265340756,
+      "time_s": 4.780914437337574
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n7.14285714286<|im_end|>"
+  },
+  {
+    "example_id": 117,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 125.0,
+      "distance_m": 10.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 125 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.976143046671968,
+      "time_s": 1.6733200530681511
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg mass has 125 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.6832815729997477<|im_end|>"
+  },
+  {
+    "example_id": 118,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 100.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg vehicle has 170 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.519202405202649,
+      "time_s": 15.339299776947408
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg vehicle has 170 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.4036008592429235<|im_end|>"
+  },
+  {
+    "example_id": 119,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 135.0,
+      "distance_m": 50.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 135 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.3484692283495345,
+      "time_s": 6.804138174397717
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 135 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 120,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 50.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 165 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.082951062292475,
+      "time_s": 5.504818825631803
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 165 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.56<|im_end|>"
+  },
+  {
+    "example_id": 121,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 70.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg ball has 150 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.745966692414834,
+      "time_s": 9.03696114115064
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg ball has 150 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14<|im_end|>"
+  },
+  {
+    "example_id": 122,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 40.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 95 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.958224257542215,
+      "time_s": 5.026246899500346
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg runner has 95 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.65<|im_end|>"
+  },
+  {
+    "example_id": 123,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 40.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg car has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.83045891539648,
+      "time_s": 8.28078671210825
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg car has 105 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.54<|im_end|>"
+  },
+  {
+    "example_id": 124,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 75.0,
+      "distance_m": 60.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 75 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.123724356957945,
+      "time_s": 9.797958971132713
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 75 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 125,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 225.0,
+      "distance_m": 60.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 225 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.660254037844387,
+      "time_s": 6.928203230275509
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 225 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 126,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 185.0,
+      "distance_m": 80.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 185 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.800735254367722,
+      "time_s": 11.763433953500924
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 185 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.56<|im_end|>"
+  },
+  {
+    "example_id": 127,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 30.0,
+      "distance_m": 80.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 30 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.581988897471611,
+      "time_s": 30.983866769659336
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 30 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n40<|im_end|>"
+  },
+  {
+    "example_id": 128,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 75.0,
+      "distance_m": 10.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 75 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.660254037844387,
+      "time_s": 1.1547005383792515
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 75 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5<|im_end|>"
+  },
+  {
+    "example_id": 129,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 60.0,
+      "distance_m": 30.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 60 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.898979485566356,
+      "time_s": 6.123724356957946
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 60 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 130,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 90.0,
+      "distance_m": 50.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 90 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.486832980505138,
+      "time_s": 5.270462766947299
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 90 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 131,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 50.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg rocket has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.606119105813881,
+      "time_s": 8.918825850158447
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg rocket has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.35<|im_end|>"
+  },
+  {
+    "example_id": 132,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 195.0,
+      "distance_m": 90.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg runner has 195 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 13.96424004376894,
+      "time_s": 6.445033866354896
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg runner has 195 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 133,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 185.0,
+      "distance_m": 50.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 185 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.852812659593164,
+      "time_s": 6.367145399670133
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 185 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.49<|im_end|>"
+  },
+  {
+    "example_id": 134,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 115.0,
+      "distance_m": 30.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 115 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.732115042211108,
+      "time_s": 5.233670255931882
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 115 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.68<|im_end|>"
+  },
+  {
+    "example_id": 135,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 50.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 205 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.158910531638177,
+      "time_s": 6.984302957695782
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 205 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.125<|im_end|>"
+  },
+  {
+    "example_id": 136,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 70.0,
+      "distance_m": 20.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.9440531887330774,
+      "time_s": 5.0709255283711
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.56<|im_end|>"
+  },
+  {
+    "example_id": 137,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 60.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 150 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 12.24744871391589,
+      "time_s": 4.898979485566357
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg mass has 150 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 138,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 160.0,
+      "distance_m": 30.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 160 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.324555320336759,
+      "time_s": 4.743416490252569
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 160 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5<|im_end|>"
+  },
+  {
+    "example_id": 139,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 210.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 210 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.831300510639732,
+      "time_s": 2.9277002188455996
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 210 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.641588833612777<|im_end|>"
+  },
+  {
+    "example_id": 140,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 10.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 165 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.0553007081949835,
+      "time_s": 1.651445647689541
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg rocket has 165 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.74<|im_end|>"
+  },
+  {
+    "example_id": 141,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 20.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 50 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.773502691896258,
+      "time_s": 3.4641016151377544
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 50 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 142,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 60.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 50 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.779644730092272,
+      "time_s": 15.874507866387544
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 50 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n12.37<|im_end|>"
+  },
+  {
+    "example_id": 143,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 70.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 25 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.5355339059327378,
+      "time_s": 19.79898987322333
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 25 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14<|im_end|>"
+  },
+  {
+    "example_id": 144,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 135.0,
+      "distance_m": 70.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 135 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.486832980505138,
+      "time_s": 7.378647873726218
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg plane has 135 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 145,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 70.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 95 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.209880722517277,
+      "time_s": 13.436008179123503
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 95 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.54<|im_end|>"
+  },
+  {
+    "example_id": 146,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 225.0,
+      "distance_m": 100.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 225 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.606601717798213,
+      "time_s": 9.428090415820634
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 225 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 147,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 80.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.422616289332565,
+      "time_s": 12.455983106584368
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 148,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 155.0,
+      "distance_m": 60.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 155 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.803408430829505,
+      "time_s": 6.815542010964777
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg mass has 155 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.872983346207417<|im_end|>"
+  },
+  {
+    "example_id": 149,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 175.0,
+      "distance_m": 30.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 175 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.0710678118654755,
+      "time_s": 4.242640687119285
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 175 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.45<|im_end|>"
+  },
+  {
+    "example_id": 150,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 70.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 70 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.9440531887330774,
+      "time_s": 25.354627641855497
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 70 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14.142135623730951<|im_end|>"
+  },
+  {
+    "example_id": 151,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 60.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg runner has 165 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.416198487095663,
+      "time_s": 8.090398349558905
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg runner has 165 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.46410161514<|im_end|>"
+  },
+  {
+    "example_id": 152,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 130.0,
+      "distance_m": 70.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.06225774829855,
+      "time_s": 8.682431421244592
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 130 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 153,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 145.0,
+      "distance_m": 70.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 145 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.615773105863909,
+      "time_s": 9.191450300180579
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 145 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.6832815729997477<|im_end|>"
+  },
+  {
+    "example_id": 154,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 10.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg ball has 170 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.146362971528592,
+      "time_s": 1.6269784336399213
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg ball has 170 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.35<|im_end|>"
+  },
+  {
+    "example_id": 155,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 170.0,
+      "distance_m": 10.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg train has 170 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.146362971528592,
+      "time_s": 1.6269784336399213
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg train has 170 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.35<|im_end|>"
+  },
+  {
+    "example_id": 156,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 20.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 105 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.246950765959598,
+      "time_s": 1.9518001458970664
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 105 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.54<|im_end|>"
+  },
+  {
+    "example_id": 157,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 145.0,
+      "distance_m": 90.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 145 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.95221787153807,
+      "time_s": 12.945509140105372
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 145 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.872983346207417<|im_end|>"
+  },
+  {
+    "example_id": 158,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 185.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 185 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.617692030835672,
+      "time_s": 10.397504898200728
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 185 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.295630140987074<|im_end|>"
+  },
+  {
+    "example_id": 159,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 225.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 225 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.0710678118654755,
+      "time_s": 14.14213562373095
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg runner has 225 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 160,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 100.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 220 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 14.832396974191326,
+      "time_s": 6.741998624632421
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg train has 220 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 161,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 5.0,
+      "distance_m": 70.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 5 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 2.23606797749979,
+      "time_s": 31.304951684997054
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg ball has 5 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14<|im_end|>"
+  },
+  {
+    "example_id": 162,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 165.0,
+      "distance_m": 80.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.12403840463596,
+      "time_s": 9.847319278346617
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 165 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 163,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 40.0,
+      "distance_m": 40.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 40 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.6514837167011076,
+      "time_s": 10.954451150103322
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 40 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.83<|im_end|>"
+  },
+  {
+    "example_id": 164,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 70.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 50 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.08248290463863,
+      "time_s": 17.146428199482244
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg rocket has 50 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 165,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 90.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 90 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.743416490252569,
+      "time_s": 21.081851067789195
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 90 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 166,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 60.0,
+      "distance_m": 20.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 60 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.140393356054125,
+      "time_s": 4.83045891539648
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg runner has 60 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 167,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 80.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 110 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.6332495807108,
+      "time_s": 12.060453783110544
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 110 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 168,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 200.0,
+      "distance_m": 80.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 200 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.0,
+      "time_s": 8.0
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 200 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 169,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 30.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 205 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 10.124228365658293,
+      "time_s": 2.9631887899487688
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg train has 205 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.125<|im_end|>"
+  },
+  {
+    "example_id": 170,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 30.0,
+      "distance_m": 30.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 30 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.1622776601683795,
+      "time_s": 9.486832980505138
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg train has 30 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 171,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 90.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 150 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.745966692414834,
+      "time_s": 11.61895003862225
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg car has 150 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 172,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 50.0,
+      "distance_m": 100.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 50 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.779644730092272,
+      "time_s": 26.457513110645905
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 50 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 173,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 195.0,
+      "distance_m": 20.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 195 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.98212002188447,
+      "time_s": 2.8644594961577314
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg rocket has 195 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.65<|im_end|>"
+  },
+  {
+    "example_id": 174,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 30.0,
+      "distance_m": 60.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 30 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.477225575051661,
+      "time_s": 10.954451150103322
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 30 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 175,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 10.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 95 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.164414002968976,
+      "time_s": 1.6222142113076254
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 95 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.14<|im_end|>"
+  },
+  {
+    "example_id": 176,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 140.0,
+      "distance_m": 20.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 140 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.66091783079296,
+      "time_s": 2.0701966780270626
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg train has 140 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 177,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 150.0,
+      "distance_m": 80.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 150 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.123724356957945,
+      "time_s": 13.063945294843617
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg runner has 150 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.24<|im_end|>"
+  },
+  {
+    "example_id": 178,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 155.0,
+      "distance_m": 50.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg plane has 155 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.187952884282608,
+      "time_s": 6.956083436402524
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg plane has 155 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.5<|im_end|>"
+  },
+  {
+    "example_id": 179,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 50.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 20 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.47213595499958,
+      "time_s": 11.180339887498947
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 20 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 180,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 105.0,
+      "distance_m": 60.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 105 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 8.366600265340756,
+      "time_s": 7.171371656006362
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg rocket has 105 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.954451150103324<|im_end|>"
+  },
+  {
+    "example_id": 181,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 55.0,
+      "distance_m": 10.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 55 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.244044240850758,
+      "time_s": 1.9069251784911847
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg ball has 55 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.35<|im_end|>"
+  },
+  {
+    "example_id": 182,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 20.0,
+      "distance_m": 80.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 20 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.6514837167011076,
+      "time_s": 21.908902300206645
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg vehicle has 20 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n40<|im_end|>"
+  },
+  {
+    "example_id": 183,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 80.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 220 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.38083151964686,
+      "time_s": 8.528028654224418
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 220 Joules of Kinetic Energy. How long does it take to travel 80? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n4.472135955<|im_end|>"
+  },
+  {
+    "example_id": 184,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 85.0,
+      "distance_m": 50.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 85 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.519202405202649,
+      "time_s": 7.669649888473704
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg plane has 85 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10.54<|im_end|>"
+  },
+  {
+    "example_id": 185,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 155.0,
+      "distance_m": 20.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 155 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 12.449899597988733,
+      "time_s": 1.6064386578049976
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg vehicle has 155 Joules of Kinetic Energy. How long does it take to travel 20? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.64<|im_end|>"
+  },
+  {
+    "example_id": 186,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 95.0,
+      "distance_m": 40.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 95 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.873397172404482,
+      "time_s": 8.207826816681234
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 95 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.56<|im_end|>"
+  },
+  {
+    "example_id": 187,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 220.0,
+      "distance_m": 90.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 220 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.928249671720919,
+      "time_s": 11.351812029964043
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg vehicle has 220 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n3.872983346207417<|im_end|>"
+  },
+  {
+    "example_id": 188,
+    "input": {
+      "mass_kg": 4,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 100.0,
+      "object_type": "runner",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 25 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 3.5355339059327378,
+      "time_s": 28.2842712474619
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 4 kg runner has 25 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 189,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 60.0,
+      "object_type": "train",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 205 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.653197277702214,
+      "time_s": 7.839860625938853
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg train has 205 Joules of Kinetic Energy. How long does it take to travel 60? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n12.35<|im_end|>"
+  },
+  {
+    "example_id": 190,
+    "input": {
+      "mass_kg": 5,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 90.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 205 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 9.055385138137417,
+      "time_s": 9.938837346736188
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 5 kg vehicle has 205 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 191,
+    "input": {
+      "mass_kg": 6,
+      "kinetic_energy_J": 110.0,
+      "distance_m": 50.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.0553007081949835,
+      "time_s": 8.257228238447704
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 6 kg mass has 110 Joules of Kinetic Energy. How long does it take to travel 50? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 192,
+    "input": {
+      "mass_kg": 3,
+      "kinetic_energy_J": 30.0,
+      "distance_m": 100.0,
+      "object_type": "ball",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 30 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.47213595499958,
+      "time_s": 22.360679774997894
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 3 kg ball has 30 Joules of Kinetic Energy. How long does it take to travel 100? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 193,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 115.0,
+      "distance_m": 10.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 115 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.361902647381804,
+      "time_s": 1.8650096164806276
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 115 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.67<|im_end|>"
+  },
+  {
+    "example_id": 194,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 205.0,
+      "distance_m": 30.0,
+      "object_type": "plane",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.158910531638177,
+      "time_s": 4.190581774617469
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg plane has 205 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n1.5811388300841898<|im_end|>"
+  },
+  {
+    "example_id": 195,
+    "input": {
+      "mass_kg": 9,
+      "kinetic_energy_J": 210.0,
+      "distance_m": 30.0,
+      "object_type": "vehicle",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 210 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 6.831300510639732,
+      "time_s": 4.3915503282684
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 9 kg vehicle has 210 Joules of Kinetic Energy. How long does it take to travel 30? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n10<|im_end|>"
+  },
+  {
+    "example_id": 196,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 200.0,
+      "distance_m": 90.0,
+      "object_type": "rocket",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 200 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 14.142135623730951,
+      "time_s": 6.363961030678928
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg rocket has 200 Joules of Kinetic Energy. How long does it take to travel 90? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n30<|im_end|>"
+  },
+  {
+    "example_id": 197,
+    "input": {
+      "mass_kg": 8,
+      "kinetic_energy_J": 70.0,
+      "distance_m": 10.0,
+      "object_type": "mass",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 4.183300132670378,
+      "time_s": 2.390457218668787
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 8 kg mass has 70 Joules of Kinetic Energy. How long does it take to travel 10? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n2.67<|im_end|>"
+  },
+  {
+    "example_id": 198,
+    "input": {
+      "mass_kg": 2,
+      "kinetic_energy_J": 25.0,
+      "distance_m": 70.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 25 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 5.0,
+      "time_s": 14.0
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 2 kg car has 25 Joules of Kinetic Energy. How long does it take to travel 70? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n14<|im_end|>"
+  },
+  {
+    "example_id": 199,
+    "input": {
+      "mass_kg": 7,
+      "kinetic_energy_J": 180.0,
+      "distance_m": 40.0,
+      "object_type": "car",
+      "prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 180 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n"
+    },
+    "ground_truth": {
+      "velocity_m_s": 7.171371656006362,
+      "time_s": 5.57773351022717
+    },
+    "model_output": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nA 7 kg car has 180 Joules of Kinetic Energy. How long does it take to travel 40? Provide your answer as a just a single number, without explanation.<|im_end|>\n<|im_start|>assistant\n5.34<|im_end|>"
+  }
+]
