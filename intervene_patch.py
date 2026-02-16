@@ -37,7 +37,7 @@ TRACES_METADATA_FILE = TRACES_DIR / "traces_metadata.json"
 # Intervention Configuration
 N_PROMPT_PAIRS = 30  # Number of pairs to test
 #LAYERS_TO_TEST = [23, 31, 47]  # Middle layers
-LAYERS_TO_TEST = [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+LAYERS_TO_TEST = [0, 5, 10, 15]
 QUESTION_START_KEYWORDS = ["What", "calculate", "Determine", "Find", "How"]  # Words indicating question start
 
 # Generation Configuration

@@ -20,4 +20,4 @@ source venv/bin/activate
 pip install -e ../TransformerLens
 
 #python generate_traces.py --experiment current --n_prompts 200 --max_new_tokens 256 --model_path /home/wuroderi/projects/def-zhijing/wuroderi/models/QwQ-32B-Preview
-python generate_traces.py --experiment market_cap --n_prompts 200 --max_new_tokens 256 --model_path /home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B
+python generate_traces.py --experiment $1 --n_prompts 200 --max_new_tokens 256 --model_path /home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B

@@ -104,7 +104,7 @@ def generate_prompts_with_cot_wrapper(experiment_name, n_prompts):
     for prompt_dict in prompts_data:
         original_prompt = prompt_dict['prompt']
         #prompt_dict['prompt'] = f"Question: {original_prompt} Answer (step-by-step): "
-        prompt_dict['prompt'] = f"Question: {original_prompt} Answer (step-by-step): "
+        prompt_dict['prompt'] = f"{original_prompt}"
     
     # Trim to exact number requested (in case rounding created extras)
     return prompts_data[:n_prompts]
