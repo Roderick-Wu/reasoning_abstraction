@@ -1,30 +1,35 @@
 """
-MLP Probing Analysis with Chain-of-Thought Generation
+Token-Level Linear Probing on Pre-Generated CoT Traces
 
-This script trains MLP probes on explicit prompts and tests them
-on implicit reasoning prompts INCLUDING the generated chain-of-thought tokens.
+This script analyzes where latent variables emerge during chain-of-thought reasoning
+by training linear probes on synthetic variations of pre-generated CoT traces.
 
 Workflow:
-1. Decoder Training (Explicit): Generate prompts like "The car is moving at X m/s" 
-   and train a small MLP to map residual stream activations to value X.
-2. CoT Generation (Implicit): Generate chain-of-thought responses for implicit reasoning problems
-3. The Reveal: Run the probe on BOTH the prompt tokens and the generated CoT tokens
-   to see where the hidden value appears during reasoning.
+1. Load pre-generated CoT traces from disk
+2. For selected traces, truncate at the point where hidden variable appears
+3. Generate many variations by substituting numbers while keeping token count identical  
+4. Train linear probes (Ridge regression) for each token position starting from "Answer"
+5. Probe ALL layer activations to find where the hidden variable emerges
+
+Example: "A 17 kg runner has 2.388e+04 Joules... Answer (step-by-step): 1/2mv^2 = 2.388e+04 J v = "
+We swap 17 and 2.388e+04 (ensuring same tokenization) to create training examples.
 """
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import numpy as np
 from transformer_lens import HookedTransformer
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from sklearn.linear_model import Ridge
 from sklearn.metrics import r2_score, mean_absolute_error
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')  # Non-interactive backend for cluster
 from pathlib import Path
-import prompt_functions
 import json
+import re
+from collections import defaultdict
+import joblib
 
 # ==========================================
 # CONFIGURATION
@@ -33,38 +38,38 @@ import json
 # Experiment Configuration
 EXPERIMENT = "velocity"  # Options: "velocity", "current"
 MODEL_PATH = "/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B"
+TRACES_DIR = Path(f"/home/wuroderi/scratch/reasoning_traces/Qwen2.5-32B/{EXPERIMENT}")
+TRACES_METADATA_FILE = TRACES_DIR / "traces_metadata.json"
 PLOTS_DIR = Path(f"/home/wuroderi/projects/def-zhijing/wuroderi/reasoning_abstraction/plots_linprob_cot_{EXPERIMENT}")
 PLOTS_DIR.mkdir(exist_ok=True)
+PROBES_DIR = Path(f"/home/wuroderi/projects/def-zhijing/wuroderi/reasoning_abstraction/probes_linprob_cot_{EXPERIMENT}")
+PROBES_DIR.mkdir(exist_ok=True)
 
 # Data Configuration
-N_TRAIN_EXPLICIT = 1000  # Number of explicit training samples
-N_TEST_PER_FORMAT = 1   # Number of test samples per implicit prompt format
+TRACE_INDICES = [0, 1, 2, 3, 4]  # Which pre-generated traces to use as base CoT outputs (will run separate experiments for each)
+TRAIN_RATIO = 0.8  # 80% train, 20% validation
+NUM_VARIATIONS_PER_TRACE = 200  # Target number of synthetic variations per base trace
 
 # Model Configuration
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Analysis Configuration
-LAYERS_TO_TEST = [7, 15, 23, 31, 47, 55, 63]  # Which layers to analyze
-MLP_HIDDEN_SIZE = 128  # Hidden layer size for MLP probe
-MLP_LEARNING_RATE = 0.0001  # Learning rate for MLP training
-MLP_EPOCHS = 50  # Number of training epochs
-MLP_BATCH_SIZE = 256  # Batch size for MLP training
+LAYERS_TO_PROBE = list(range(64))  # Probe ALL 64 layers
+RIDGE_ALPHA = 1.0  # Ridge regression regularization strength
 
-# CoT Generation Configuration
-MAX_NEW_TOKENS = 512  # Maximum tokens to generate (reduced to avoid OOM)
-TEMPERATURE = 0.0  # Use greedy decoding (top-1 sampling) for deterministic generation
-TOP_P = 1.0  # Not used when temperature=0
-
-print(f"="*60)
-print(f"MLP PROBING WITH CHAIN-OF-THOUGHT: {EXPERIMENT.upper()}")
-print(f"="*60)
+print(f"="*80)
+print(f"TOKEN-LEVEL LINEAR PROBING ON PRE-GENERATED COT: {EXPERIMENT.upper()}")
+print(f"="*80)
 print(f"Model: {MODEL_PATH}")
+print(f"Traces dir: {TRACES_DIR}")
 print(f"Device: {device}")
 print(f"Plots directory: {PLOTS_DIR}")
+print(f"Trace indices: {TRACE_INDICES}")
+print(f"Probing layers: {len(LAYERS_TO_PROBE)} layers")
 print()
 
 # ==========================================
-# LOAD MODEL
+# LOAD MODEL AND TRACES
 # ==========================================
 
 print("Loading model...")
@@ -102,204 +107,174 @@ if hasattr(model, 'pos_embed') and model.pos_embed.W_pos.device.type == 'cpu':
 print(f"Model loaded: {model.cfg.n_layers} layers, {model.cfg.d_model} dimensions")
 print(f"Embedding device: {model.embed.W_E.device}\n")
 
-# ==========================================
-# GENERATE DATASETS
-# ==========================================
-
-print("Generating datasets...")
-
-# Select appropriate prompt generation functions based on experiment
-if EXPERIMENT == "velocity":
-    gen_explicit = prompt_functions.gen_explicit_velocity
-    gen_implicit = lambda: prompt_functions.gen_implicit_velocity(samples_per_prompt=N_TEST_PER_FORMAT)
-elif EXPERIMENT == "current":
-    gen_explicit = prompt_functions.gen_explicit_current
-    gen_implicit = lambda: prompt_functions.gen_implicit_current(samples_per_prompt=N_TEST_PER_FORMAT)
-else:
-    raise ValueError(f"Unknown experiment: {EXPERIMENT}")
-
-# Generate explicit training data
-train_prompts, train_values = gen_explicit(n_samples=N_TRAIN_EXPLICIT)
-print(f"Generated {len(train_prompts)} explicit training prompts")
-print(f"  Example: '{train_prompts[0]}' -> {train_values[0]}")
-print(f"  Value range: [{train_values.min():.1f}, {train_values.max():.1f}]")
-
-# Generate implicit test data (one per format)
-test_prompts, test_prompt_ids, test_true_values = gen_implicit()
-
-print(f"Generated {len(test_prompts)} implicit test prompts ({N_TEST_PER_FORMAT} per format)")
-for i, (prompt, val) in enumerate(zip(test_prompts, test_true_values)):
-    print(f"  Format {test_prompt_ids[i]}: '{prompt[:80]}...' -> {val:.1f}")
+# Load pre-generated traces
+print("Loading pre-generated traces...")
+with open(TRACES_METADATA_FILE, 'r') as f:
+    all_traces = json.load(f)
+print(f"Loaded {len(all_traces)} traces from {TRACES_METADATA_FILE}")
+print(f"Will run {len(TRACE_INDICES)} separate experiments, one for each base trace CoT output")
+print(f"Each experiment will use all {len(all_traces)} traces to generate synthetic variations")
 print()
 
 # ==========================================
-# MLP PROBE DEFINITION
+# GENERATE SYNTHETIC VARIATIONS
 # ==========================================
 
-class MLPProbe(nn.Module):
-    """
-    Small Multi-Layer Perceptron for non-linear probing.
-    Architecture: input -> hidden -> hidden -> output
-    """
-    def __init__(self, input_dim, hidden_dim=128):
-        super(MLPProbe, self).__init__()
-        self.fc1 = nn.Linear(input_dim, hidden_dim)
-        self.fc2 = nn.Linear(hidden_dim, hidden_dim)
-        self.fc3 = nn.Linear(hidden_dim, 1)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.1)
-        
-    def forward(self, x):
-        x = self.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = self.relu(self.fc2(x))
-        x = self.dropout(x)
-        x = self.fc3(x)
-        return x.squeeze(-1)
-
-def train_mlp_probe(train_acts, train_labels, input_dim, hidden_dim=128, 
-                    learning_rate=0.001, epochs=50, batch_size=256, device='cuda'):
-    """
-    Train an MLP probe on the given activations and labels.
+def find_number_in_scientific_notation(text, number):
+    """Find scientific notation representation of a number in text."""
+    # Try various scientific notation formats
+    sci_patterns = [
+        f"{number:.3e}",  # Standard: 2.388e+04
+        f"{number:.2e}",  # Two decimals
+        f"{number:.4e}",  # Four decimals
+        f"{number:.1e}",  # One decimal
+    ]
     
-    Args:
-        train_acts: numpy array of shape [n_samples, input_dim]
-        train_labels: numpy array of shape [n_samples]
-        input_dim: dimension of input features
-        hidden_dim: size of hidden layers
-        learning_rate: learning rate for optimizer
-        epochs: number of training epochs
-        batch_size: batch size for training
-        device: device to train on
-        
-    Returns:
-        Trained MLPProbe model
-    """
-    # Convert to tensors
-    X = torch.FloatTensor(train_acts)
-    y = torch.FloatTensor(train_labels)
+    for pattern in sci_patterns:
+        if pattern in text:
+            return pattern
     
-    # Create dataset and dataloader
-    dataset = torch.utils.data.TensorDataset(X, y)
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    
-    # Initialize model
-    probe = MLPProbe(input_dim, hidden_dim).to(device)
-    criterion = nn.MSELoss()
-    optimizer = optim.Adam(probe.parameters(), lr=learning_rate)
-    
-    # Training loop
-    probe.train()
-    for epoch in range(epochs):
-        total_loss = 0
-        for batch_X, batch_y in dataloader:
-            batch_X = batch_X.to(device)
-            batch_y = batch_y.to(device)
+    # Also try without the + sign
+    for pattern in sci_patterns:
+        pattern_no_plus = pattern.replace('+', '')
+        if pattern_no_plus in text:
+            return pattern_no_plus
             
-            optimizer.zero_grad()
-            predictions = probe(batch_X)
-            loss = criterion(predictions, batch_y)
-            loss.backward()
-            optimizer.step()
-            
-            total_loss += loss.item()
+    return None
+
+def truncate_at_velocity_variable(generated_text):
+    """
+    Truncate the generated text at the point where the velocity value appears.
+    Keeps everything up to and including "v = " but stops before the actual number.
+    Example: "...1/2mv^2 = 2.388e+04 J v = 52.8 m/s..." -> "...1/2mv^2 = 2.388e+04 J v = "
+    """
+    # Common patterns where velocity value appears
+    patterns = [
+        r'v\s*=\s*',  # "v = "
+        r'velocity\s*=\s*',  # "velocity = "
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, generated_text, re.IGNORECASE)
+        if match:
+            # Include the pattern itself (e.g., "v = ") but stop there
+            truncation_point = match.end()
+            truncated = generated_text[:truncation_point]
+            return truncated
+    
+    # If no pattern found, return original (no CoT generated)
+    return generated_text
+
+def create_variations_from_traces(trace, all_traces_pool, tokenizer, model):
+    """
+    Create synthetic variations of a trace by substituting numbers from other traces
+    while ensuring tokenization stays identical.
+    """
+    variations = []
+    
+    # Use generated_text (includes CoT) and truncate at velocity
+    original_full_text = trace.get('generated_text', trace['prompt'])
+    original_text = truncate_at_velocity_variable(original_full_text)
+    
+    original_m = trace['m']
+    original_ke = trace['ke']
+    original_v = trace['v']
+    original_d = trace['d']
+    original_format_id = trace['format_id']
+    
+    # Find the original KE string in scientific notation
+    original_ke_str = find_number_in_scientific_notation(original_text, original_ke)
+    if original_ke_str is None:
+        original_ke_str = f"{original_ke:.3e}"
+    
+    # Count original tokens for validation
+    original_tokens_obj = model.to_tokens(original_text, prepend_bos=True)
+    original_n_tokens = original_tokens_obj.shape[1]
+    
+    # Filter to only use traces with the same format_id (same prompt structure)
+    same_format_traces = [t for t in all_traces_pool if t['format_id'] == original_format_id and t['id'] != trace['id']]
+    
+    print(f"  Found {len(same_format_traces)} traces with same format_id {original_format_id}")
+    
+    successful_variations = 0
+    
+    for other_trace in same_format_traces:
+        # Get numbers from other trace
+        m_new = other_trace['m']
+        v_new = other_trace['v']
+        d_new = other_trace['d']
+        ke_new = other_trace['ke']
         
-        if (epoch + 1) % 10 == 0:
-            avg_loss = total_loss / len(dataloader)
-            print(f"    Epoch {epoch+1}/{epochs}, Loss: {avg_loss:.4f}")
+        # Get the other trace's truncated text to extract its KE format
+        other_full_text = other_trace.get('generated_text', other_trace['prompt'])
+        other_text = truncate_at_velocity_variable(other_full_text)
+        
+        # Find KE string format from other trace
+        ke_new_str = find_number_in_scientific_notation(other_text, ke_new)
+        if ke_new_str is None:
+            ke_new_str = f"{ke_new:.3e}"
+        
+        # Create new text by substitution (in both question and CoT parts)
+        new_text = original_text
+        new_text = new_text.replace(f" {original_m} kg", f" {m_new} kg")
+        new_text = new_text.replace(original_ke_str, ke_new_str)
+        new_text = new_text.replace(f" {original_d} m", f" {d_new} m")
+        
+        # Verify token count stayed the same
+        new_tokens_obj = model.to_tokens(new_text, prepend_bos=True)
+        new_n_tokens = new_tokens_obj.shape[1]
+        
+        if new_n_tokens != original_n_tokens:
+            print(f"    SKIP: Token count mismatch! Original={original_n_tokens}, New={new_n_tokens}")
+            print(f"          m: {original_m}->{m_new}, ke: {original_ke_str}->{ke_new_str}, d: {original_d}->{d_new}")
+            continue
+            
+        # Skip if values didn't actually change
+        if m_new == original_m and ke_new == original_ke and d_new == original_d:
+            continue
+        
+        variations.append({
+            'prompt': new_text,  # This now includes CoT up to "v = "
+            'm': m_new,
+            'ke': ke_new,
+            'v': v_new,  # This is our target variable!
+            'd': d_new,
+            'original_trace_id': trace['id'],
+            'source_trace_id': other_trace['id'],
+            'n_tokens': new_n_tokens
+        })
+        successful_variations += 1
     
-    probe.eval()
-    return probe
+    print(f"  Generated {successful_variations} valid variations")
+    
+    return variations
 
-# ==========================================
-# ACTIVATION EXTRACTION
-# ==========================================
-
-def find_value_position_in_prompt(prompt, value, model):
+def extract_activations_all_layers(prompts, model, layers, batch_size=8):
     """
-    Find the token position where the target value appears in the prompt.
-    Returns the first token position where the value string appears.
-    
-    Args:
-        prompt: Text prompt
-        value: Numeric value to find
-        model: HookedTransformer model
-    
-    Returns:
-        Token index where value appears (or 0 if not found)
+    Extract activations from all tokens for all specified layers.
+    Returns dict mapping layer -> numpy array [total_tokens, d_model]
     """
-    # Convert value to string with different formats to match
-    value_strs = [f"{value:.1f}", f"{value:.2f}", f"{value}", str(int(value)) if value == int(value) else str(value)]
+    hook_names = [f"blocks.{layer}.hook_resid_post" for layer in layers]
+    all_layer_activations = {layer: [] for layer in layers}
+    all_token_counts = []
     
-    # Try to find value string in prompt
-    value_pos_in_text = -1
-    matched_str = None
-    for val_str in value_strs:
-        if val_str in prompt:
-            value_pos_in_text = prompt.index(val_str)
-            matched_str = val_str
-            break
-    
-    if value_pos_in_text == -1:
-        return 0
-    
-    # Tokenize and find the token position
-    tokens = model.to_tokens(prompt, prepend_bos=True)
-    
-    # Get text for each token
-    for i in range(tokens.shape[1]):
-        # Check if we've reached the value position
-        # Reconstruct text up to this point
-        reconstructed = model.to_string(tokens[0, :i+1])
-        if matched_str in reconstructed and matched_str not in model.to_string(tokens[0, :i]):
-            return i
-    
-    return 0
-
-def extract_post_value_activations(prompts, values, model, layer, batch_size=16):
-    """
-    Extract activations only from tokens at or after the position where the value appears.
-    This respects causal attention masking - only these tokens can have information about the value.
-    
-    Args:
-        prompts: List of text prompts
-        values: Array of target values corresponding to each prompt
-        model: HookedTransformer model
-        layer: Layer index to extract from
-        batch_size: Batch size for processing
-    
-    Returns:
-        Tuple of (activations numpy array, labels numpy array)
-    """
-    hook_name = f"blocks.{layer}.hook_resid_post"
-    all_activations = []
-    all_labels = []
-    
-    # Get the device of the embedding layer
     embed_device = model.embed.W_E.device
     
     for i in range(0, len(prompts), batch_size):
         batch_prompts = prompts[i:i + batch_size]
-        batch_values = values[i:i + batch_size]
         
-        # Tokenize each prompt individually
+        # Tokenize individually
         batch_tokens_list = []
         batch_token_lengths = []
-        batch_value_positions = []
         max_len = 0
         
-        for j, prompt in enumerate(batch_prompts):
+        for prompt in batch_prompts:
             tokens = model.to_tokens(prompt, prepend_bos=True)
             batch_tokens_list.append(tokens)
             batch_token_lengths.append(tokens.shape[1])
-            
-            # Find where the value appears
-            value_pos = find_value_position_in_prompt(prompt, batch_values[j], model)
-            batch_value_positions.append(value_pos)
-            
             max_len = max(max_len, tokens.shape[1])
         
-        # Pad tokens to same length for batching
+        # Pad to same length
         padded_tokens = []
         for tokens in batch_tokens_list:
             if tokens.shape[1] < max_len:
@@ -307,367 +282,665 @@ def extract_post_value_activations(prompts, values, model, layer, batch_size=16)
                 tokens = torch.cat([tokens, padding], dim=1)
             padded_tokens.append(tokens)
         
-        # Stack into batch and move to embedding device
+        # Stack and move to device
         batch_tokens = torch.cat(padded_tokens, dim=0).to(embed_device)
         
         with torch.no_grad():
-            # Run with cache using pre-tokenized input
             _, cache = model.run_with_cache(
                 batch_tokens,
-                names_filter=lambda name: name == hook_name
+                names_filter=lambda name: name in hook_names
             )
         
-        # Extract activations only from tokens at/after value position
-        batch_acts = cache[hook_name]  # [batch_size, seq_len, d_model]
-        
-        for j in range(len(batch_prompts)):
-            n_tokens = batch_token_lengths[j]
-            value_pos = batch_value_positions[j]
+        # Extract activations for each layer
+        for layer in layers:
+            hook_name = f"blocks.{layer}.hook_resid_post"
+            batch_acts = cache[hook_name]  # [batch_size, seq_len, d_model]
             
-            # Only take activations from value_pos onwards
-            if value_pos < n_tokens:
-                prompt_acts = batch_acts[j, value_pos:n_tokens].cpu().float()  # [n_valid_tokens, d_model]
-                n_valid_tokens = n_tokens - value_pos
-                
-                all_activations.append(prompt_acts)
-                # Repeat the label for all valid tokens
-                all_labels.extend([batch_values[j]] * n_valid_tokens)
+            # Collect only non-padded tokens
+            for j in range(len(batch_prompts)):
+                n_tokens = batch_token_lengths[j]
+                prompt_acts = batch_acts[j, :n_tokens].cpu().float()
+                all_layer_activations[layer].append(prompt_acts)
+        
+        # Track token counts for first layer (same for all)
+        if i == 0 or len(all_token_counts) < len(prompts):
+            all_token_counts.extend(batch_token_lengths)
     
-    # Concatenate all activations
-    activations = torch.cat(all_activations, dim=0).numpy()
-    labels = np.array(all_labels)
-    
-    return activations, labels
-
-def generate_and_extract_activations(prompt, model, layers, max_new_tokens=512):
-    """
-    Generate chain-of-thought completion using model.generate() and extract activations
-    from the complete sequence (prompt + generated tokens) for all specified layers.
-    
-    Args:
-        prompt: Text prompt
-        model: HookedTransformer model
-        layers: List of layer indices to extract from
-        max_new_tokens: Maximum tokens to generate
-    
-    Returns:
-        Tuple of (activations_dict, token_strings, prompt_length, generated_text)
-        where activations_dict maps layer -> numpy array [seq_len, d_model]
-    """
-    embed_device = model.embed.W_E.device
-    
-    # Tokenize prompt
-    prompt_tokens = model.to_tokens(prompt, prepend_bos=True).to(embed_device)
-    prompt_length = prompt_tokens.shape[1]
-    
-    print(f"    Generating CoT (max {max_new_tokens} tokens)...")
-    
-    # Generate using model.generate()
-    output_tokens = model.generate(
-        prompt_tokens,
-        max_new_tokens=max_new_tokens,
-        temperature=TEMPERATURE,
-        top_p=TOP_P,
-        stop_at_eos=True,
-        eos_token_id=model.tokenizer.eos_token_id,
-        prepend_bos=False  # Already included in prompt_tokens
-    )
-    
-    total_length = output_tokens.shape[1]
-    generated_text = model.to_string(output_tokens[0, prompt_length:])
-    
-    print(f"    Generated {total_length - prompt_length} tokens")
-    print(f"    Extracting activations from all {len(layers)} layers...")
-    
-    # Extract activations from all layers in a single forward pass
-    hook_names = [f"blocks.{layer}.hook_resid_post" for layer in layers]
-    with torch.no_grad():
-        _, cache = model.run_with_cache(
-            output_tokens,
-            names_filter=lambda name: name in hook_names
-        )
-    
-    # Collect activations for each layer
-    activations_dict = {}
-    for layer in layers:
-        hook_name = f"blocks.{layer}.hook_resid_post"
-        # [batch_size, seq_len, d_model] -> [seq_len, d_model]
-        activations_dict[layer] = cache[hook_name][0].cpu().float().numpy()
-    
-    # Get token strings
-    token_strings = [model.to_string(output_tokens[0, i]) for i in range(total_length)]
-    
-    # Clear cache
-    del cache
-    torch.cuda.empty_cache()
-    
-    return activations_dict, token_strings, prompt_length, generated_text, output_tokens
-
-# ==========================================
-# TRAIN PROBES
-# ==========================================
-
-print("Training MLP probes on explicit prompts...")
-
-# Get input dimension from first layer
-first_layer_acts, first_layer_labels = extract_post_value_activations(
-    train_prompts[:1], train_values[:1], model, LAYERS_TO_TEST[0]
-)
-input_dim = first_layer_acts.shape[1]
-print(f"Input dimension: {input_dim}\n")
-
-# Store trained probes
-trained_probes = {}
-
-for i, layer in enumerate(LAYERS_TO_TEST):
-    print(f"Layer {layer:2d}:")
-    
-    # Extract activations only from tokens at/after value position
-    train_acts, train_labels = extract_post_value_activations(
-        train_prompts, train_values, model, layer
-    )
-    
-    print(f"  Training on {len(train_acts)} tokens (only post-value tokens)...")
-    
-    # Train MLP probe
-    probe = train_mlp_probe(
-        train_acts, train_labels, 
-        input_dim=input_dim,
-        hidden_dim=MLP_HIDDEN_SIZE,
-        learning_rate=MLP_LEARNING_RATE,
-        epochs=MLP_EPOCHS,
-        batch_size=MLP_BATCH_SIZE,
-        device=device
-    )
-    trained_probes[layer] = probe
-    
-    print(f"  Training complete\n")
-
-# ==========================================
-# GENERATE COT AND ANALYZE
-# ==========================================
-
-print("="*60)
-print("GENERATING CHAIN-OF-THOUGHT AND ANALYZING")
-print("="*60)
-
-# Store results for each test sample
-cot_results = []
-
-for sample_idx in range(len(test_prompts)):
-    prompt = test_prompts[sample_idx]
-    prompt_id = test_prompt_ids[sample_idx]
-    true_value = test_true_values[sample_idx]
-    
-    print(f"\nSample {sample_idx + 1}/{len(test_prompts)} (Format {prompt_id}, True value: {true_value:.1f})")
-    print(f"Prompt: {prompt[:100]}...")
-    
-    sample_result = {
-        'prompt': prompt,
-        'prompt_id': int(prompt_id),
-        'true_value': float(true_value),
-        'layers': {}
+    # Concatenate activations
+    activations_dict = {
+        layer: torch.cat(all_layer_activations[layer], dim=0).numpy()
+        for layer in layers
     }
     
-    # Generate CoT and extract activations from all layers at once
-    print(f"  Generating CoT and extracting activations...")
-    activations_dict, token_strings, prompt_length, generated_text, full_tokens = generate_and_extract_activations(
-        prompt, model, LAYERS_TO_TEST, max_new_tokens=MAX_NEW_TOKENS
+    return activations_dict, all_token_counts
+
+def find_answer_token_position(prompt, tokenizer, model):
+    """Find the token position where 'Answer' starts."""
+    tokens = model.to_tokens(prompt, prepend_bos=True)[0]
+    
+    # Look for "Answer" keyword
+    for i in range(len(tokens)):
+        token_str = model.to_string(tokens[i])
+        if "Answer" in token_str or "answer" in token_str:
+            return i
+    
+    # Fallback: return middle of sequence
+    return len(tokens) // 2
+
+print("Generating synthetic variations for each trace...")
+print("="*80)
+
+# ==========================================
+# MAIN EXPERIMENT LOOP
+# ==========================================
+
+for trace_idx in TRACE_INDICES:
+    if trace_idx >= len(all_traces):
+        print(f"WARNING: Trace index {trace_idx} out of range, skipping")
+        continue
+    
+    trace = all_traces[trace_idx]
+    
+    print(f"\n{'='*80}")
+    print(f"EXPERIMENT: TRACE {trace['id']} (Index {trace_idx}) - Format {trace['format_id']}")
+    print(f"{'='*80}")
+    print(f"Original values: m={trace['m']} kg, ke={trace['ke']:.3e} J, v={trace['v']} m/s, d={trace['d']} m")
+    
+    # Create trace-specific directories
+    trace_plots_dir = PLOTS_DIR / f"trace_{trace_idx}"
+    trace_plots_dir.mkdir(exist_ok=True)
+    trace_probes_dir = PROBES_DIR / f"trace_{trace_idx}"
+    trace_probes_dir.mkdir(exist_ok=True)
+    
+    # Get full generated text and truncate at velocity variable
+    original_full_text = trace.get('generated_text', trace['prompt'])
+    original_truncated = truncate_at_velocity_variable(original_full_text)
+    
+    print(f"\nOriginal full text (truncated at 'v = '):")
+    print(f"  {original_truncated[:200]}..." if len(original_truncated) > 200 else f"  {original_truncated}")
+    
+    # Tokenize original truncated text
+    original_tokens_obj = model.to_tokens(original_truncated, prepend_bos=True)
+    original_token_strs = model.to_str_tokens(original_truncated, prepend_bos=True)
+    print(f"\nOriginal tokenization ({original_tokens_obj.shape[1]} tokens)")
+    
+    # Generate variations using numbers from ALL traces
+    print(f"\nGenerating variations using all {len(all_traces)} traces...")
+    variations = create_variations_from_traces(trace, all_traces, tokenizer, model)
+    
+    print(f"\n{'-'*80}")
+    print(f"GENERATED VARIATIONS ({len(variations)} total)")
+    print(f"{'-'*80}")
+    
+    # Show a few example variations
+    for var_idx, var in enumerate(variations[:5]):  # Show first 5 for brevity
+        print(f"\nVariation {var_idx + 1} (from trace {var['source_trace_id']}):")
+        print(f"  Values: m={var['m']} kg, ke={var['ke']:.3e} J, v={var['v']} m/s")
+        print(f"  Token count: {var['n_tokens']}")
+    
+    if len(variations) > 5:
+        print(f"\n... and {len(variations) - 5} more variations")
+    
+    # ==========================================
+    # EXTRACT ACTIVATIONS
+    # ==========================================
+
+    print("\nExtracting activations from all variations...")
+    print("This may take a while...")
+
+    # Split into train and validation
+    train_variations, val_variations = train_test_split(
+        variations, 
+        train_size=TRAIN_RATIO, 
+        random_state=42
     )
-    
-    print(f"  Total sequence length: {len(token_strings)} tokens (prompt: {prompt_length}, generated: {len(token_strings) - prompt_length})")
-    
-    # For each layer, run probe on extracted activations
-    for layer in LAYERS_TO_TEST:
-        print(f"  Layer {layer}:")
-        probe = trained_probes[layer]
+
+    print(f"Train variations: {len(train_variations)}")
+    print(f"Val variations: {len(val_variations)}")
+
+    # Extract activations for training data
+    train_prompts = [v['prompt'] for v in train_variations]
+    train_velocities = np.array([v['v'] for v in train_variations])
+
+    print("\nExtracting training activations...")
+    train_activations_dict, train_token_counts = extract_activations_all_layers(
+        train_prompts, model, LAYERS_TO_PROBE, batch_size=4
+    )
+
+    print(f"Extracted training activations: {train_activations_dict[0].shape}")
+
+    # Extract activations for validation data  
+    val_prompts = [v['prompt'] for v in val_variations]
+    val_velocities = np.array([v['v'] for v in val_variations])
+
+    print("\nExtracting validation activations...")
+    val_activations_dict, val_token_counts = extract_activations_all_layers(
+        val_prompts, model, LAYERS_TO_PROBE, batch_size=4
+    )
+
+    print(f"Extracted validation activations: {val_activations_dict[0].shape}")
+
+    # ==========================================
+    # TRAIN PER-TOKEN LINEAR PROBES
+    # ==========================================
+
+    print("\n" + "="*80)
+    print("TRAINING LINEAR PROBES FOR EACH TOKEN POSITION")
+    print("="*80)
+
+    # Find "Answer" position in first prompt to determine where to start probing
+    example_prompt = train_prompts[0]
+    answer_token_pos = find_answer_token_position(example_prompt, tokenizer, model)
+    print(f"Starting probes from token position {answer_token_pos} (Answer keyword)")
+    print(f"Example prompt tokens: {model.to_str_tokens(example_prompt, prepend_bos=True)[:answer_token_pos+5]}")
+    print()
+
+    # Determine max sequence length across all prompts
+    max_seq_len = max(train_token_counts + val_token_counts)
+    print(f"Maximum sequence length: {max_seq_len} tokens")
+
+    # Get token strings for plotting (from first example)
+    example_token_strs = model.to_str_tokens(example_prompt, prepend_bos=True)
+    print(f"Example tokens: {example_token_strs[:20]}...")
+    print()
+
+    # Initialize storage for probes and results
+    # probes[token_pos][layer] = Ridge probe
+    probes = defaultdict(dict)
+
+    # results[token_pos][layer] = {train_r2, val_r2, train_mae, val_mae}
+    results = defaultdict(dict)
+
+    # Train probes for each token position starting from "Answer"
+    for token_pos in range(answer_token_pos, max_seq_len):
+        print(f"\n{'='*80}")
+        print(f"TOKEN POSITION {token_pos}")
+        print(f"{'='*80}")
         
-        # Get activations for this layer
-        activations = activations_dict[layer]  # [seq_len, d_model]
+        # Collect activations and labels for this token position across all sequences
+        train_acts_at_pos = {layer: [] for layer in LAYERS_TO_PROBE}
+        train_labels_at_pos = []
         
-        # Run probe on all tokens
-        with torch.no_grad():
-            acts_tensor = torch.FloatTensor(activations).to(device)
-            predictions = probe(acts_tensor).cpu().numpy()
+        # Track which training examples have this token position
+        current_idx = 0
+        for i, n_tokens in enumerate(train_token_counts):
+            if token_pos < n_tokens:
+                # This sequence has this token position
+                for layer in LAYERS_TO_PROBE:
+                    # Extract activation at this specific token position
+                    act = train_activations_dict[layer][current_idx + token_pos]
+                    train_acts_at_pos[layer].append(act)
+                train_labels_at_pos.append(train_velocities[i])
+            current_idx += n_tokens
         
-        # Compute statistics
-        prompt_predictions = predictions[:prompt_length]
-        generated_predictions = predictions[prompt_length:]
+        # Convert to arrays
+        n_samples = len(train_labels_at_pos)
+        if n_samples < 10:  # Need minimum samples to train
+            print(f"  Skipping: only {n_samples} samples at this position")
+            continue
         
-        prompt_mean = np.mean(prompt_predictions)
-        prompt_std = np.std(prompt_predictions)
-        generated_mean = np.mean(generated_predictions) if len(generated_predictions) > 0 else 0.0
-        generated_std = np.std(generated_predictions) if len(generated_predictions) > 0 else 0.0
+        train_labels_at_pos = np.array(train_labels_at_pos)
+        print(f"  Training samples at this position: {n_samples}")
         
-        # Find tokens closest to true value
-        errors = np.abs(predictions - true_value)
-        closest_indices = np.argsort(errors)[:5]
+        # Do the same for validation data
+        val_acts_at_pos = {layer: [] for layer in LAYERS_TO_PROBE}
+        val_labels_at_pos = []
         
-        print(f"    Prompt tokens: mean={prompt_mean:.2f} ± {prompt_std:.2f}")
-        print(f"    Generated tokens: mean={generated_mean:.2f} ± {generated_std:.2f}")
-        print(f"    Closest predictions to {true_value:.1f}:")
-        for idx in closest_indices:
-            token_type = "PROMPT" if idx < prompt_length else "GENERATED"
-            token_str = model.to_string(full_tokens[0, idx])
-            print(f"      Token {idx} ({token_type}): '{token_str[:20]}' -> {predictions[idx]:.2f}")
+        current_idx = 0
+        for i, n_tokens in enumerate(val_token_counts):
+            if token_pos < n_tokens:
+                for layer in LAYERS_TO_PROBE:
+                    act = val_activations_dict[layer][current_idx + token_pos]
+                    val_acts_at_pos[layer].append(act)
+                val_labels_at_pos.append(val_velocities[i])
+            current_idx += n_tokens
         
-        # Find when predictions get close to true value
-        errors = np.abs(predictions - true_value)
-        close_threshold = 5.0  # Within 5 units
-        close_positions = np.where(errors < close_threshold)[0]
+        val_labels_at_pos = np.array(val_labels_at_pos)
+        print(f"  Validation samples at this position: {len(val_labels_at_pos)}")
         
-        first_close_prompt = None
-        first_close_generated = None
-        if len(close_positions) > 0:
-            first_close = close_positions[0]
-            if first_close < prompt_length:
-                first_close_prompt = int(first_close)
+        # Train a probe for each layer at this token position
+        for layer in LAYERS_TO_PROBE:
+            train_acts_layer = np.array(train_acts_at_pos[layer])
+            
+            # Train Ridge regression
+            probe = Ridge(alpha=RIDGE_ALPHA)
+            probe.fit(train_acts_layer, train_labels_at_pos)
+            
+            # Store probe
+            probes[token_pos][layer] = probe
+            
+            # Evaluate on training data
+            train_preds = probe.predict(train_acts_layer)
+            train_r2 = r2_score(train_labels_at_pos, train_preds)
+            train_mae = mean_absolute_error(train_labels_at_pos, train_preds)
+            train_mpe = np.mean(np.abs((train_preds - train_labels_at_pos) / train_labels_at_pos)) * 100
+            
+            # Evaluate on validation data
+            if len(val_labels_at_pos) > 0:
+                val_acts_layer = np.array(val_acts_at_pos[layer])
+                val_preds = probe.predict(val_acts_layer)
+                val_r2 = r2_score(val_labels_at_pos, val_preds)
+                val_mae = mean_absolute_error(val_labels_at_pos, val_preds)
+                # Calculate mean percent error: mean(|pred - true| / |true|) * 100
+                val_mpe = np.mean(np.abs((val_preds - val_labels_at_pos) / val_labels_at_pos)) * 100
             else:
-                first_close_generated = int(first_close - prompt_length)
+                val_r2 = 0.0
+                val_mae = float('inf')
+                val_mpe = float('inf')
+            
+            # Store results
+            results[token_pos][layer] = {
+                'train_r2': train_r2,
+                'val_r2': val_r2,
+                'train_mae': train_mae,
+                'val_mae': val_mae,
+                'train_mpe': train_mpe,
+                'val_mpe': val_mpe,
+                'n_train': n_samples,
+                'n_val': len(val_labels_at_pos)
+            }
         
-        sample_result['layers'][layer] = {
-            'predictions': predictions.tolist(),
-            'token_strings': token_strings,
-            'prompt_length': prompt_length,
-            'generated_text': generated_text,
-            'prompt_mean': float(prompt_mean),
-            'prompt_std': float(prompt_std),
-            'generated_mean': float(generated_mean),
-            'generated_std': float(generated_std),
-            'first_close_prompt': first_close_prompt,
-            'first_close_generated': first_close_generated,
-            'min_error': float(np.min(errors)),
-            'min_error_position': int(np.argmin(errors)),
-        }
-    
-    cot_results.append(sample_result)
-    
-    # Clean up memory after each sample
-    torch.cuda.empty_cache()
+        # Print summary for this token position
+        best_layer = max(LAYERS_TO_PROBE, key=lambda l: results[token_pos][l]['val_r2'])
+        best_r2 = results[token_pos][best_layer]['val_r2']
+        best_mae = results[token_pos][best_layer]['val_mae']
+        print(f"  Best layer: {best_layer} (Val R²: {best_r2:.3f}, MAE: {best_mae:.2f})")
 
-# Save results to JSON
-results_file = PLOTS_DIR / 'cot_analysis_results.json'
-with open(results_file, 'w') as f:
-    json.dump(cot_results, f, indent=2)
-print(f"\nSaved detailed results to {results_file}")
+    print(f"\n{'='*80}")
+    print("PROBE TRAINING COMPLETE")
+    print(f"{'='*80}")
+    print()
 
-# Print summary of when values emerge
-print("\n" + "="*60)
-print("SUMMARY: When Does the Hidden Value Emerge?")
-print("="*60)
-for sample_idx, sample_result in enumerate(cot_results):
-    print(f"\nSample {sample_idx + 1} (Format {sample_result['prompt_id']}, True: {sample_result['true_value']:.1f})")
-    for layer in LAYERS_TO_TEST:
-        layer_data = sample_result['layers'][layer]
-        min_error_pos = layer_data['min_error_position']
-        min_error = layer_data['min_error']
+    # ==========================================
+    # COLLECT TOP 5 PREDICTIONS & SAVE VALIDATION DATA
+    # ==========================================
+
+    print("Collecting top 5 predictions...")
+    # Find top 5 best predictions across all layers and token positions
+    all_predictions = []
+    for token_pos in results:
+        for layer in results[token_pos]:
+            all_predictions.append({
+                'token_pos': token_pos,
+                'layer': layer,
+                'val_r2': results[token_pos][layer]['val_r2'],
+                'val_mae': results[token_pos][layer]['val_mae'],
+                'val_mpe': results[token_pos][layer]['val_mpe']
+            })
+    
+    # Sort by R² (descending) and take top 5
+    all_predictions.sort(key=lambda x: x['val_r2'], reverse=True)
+    top_5_configs = all_predictions[:5]
+    
+    # For each top 5 config, get actual predictions
+    top_5_predictions = []
+    for config in top_5_configs:
+        token_pos = config['token_pos']
+        layer = config['layer']
         
-        if min_error_pos < layer_data['prompt_length']:
-            location = f"PROMPT (token {min_error_pos})"
+        # Get token string
+        token_str = example_token_strs[token_pos] if token_pos < len(example_token_strs) else f"pos{token_pos}"
+        
+        # Get validation predictions for this config
+        current_idx = 0
+        val_acts_layer = []
+        val_labels_layer = []
+        val_indices = []
+        
+        for i, n_tokens in enumerate(val_token_counts):
+            if token_pos < n_tokens:
+                act = val_activations_dict[layer][current_idx + token_pos]
+                val_acts_layer.append(act)
+                val_labels_layer.append(val_velocities[i])
+                val_indices.append(i)
+            current_idx += n_tokens
+        
+        val_acts_layer = np.array(val_acts_layer)
+        val_labels_layer = np.array(val_labels_layer)
+        
+        # Get predictions from the trained probe
+        probe = probes[token_pos][layer]
+        preds = probe.predict(val_acts_layer)
+        
+        top_5_predictions.append({
+            'token_pos': token_pos,
+            'token': token_str,
+            'layer': layer,
+            'val_r2': config['val_r2'],
+            'val_mae': config['val_mae'],
+            'val_mpe': config['val_mpe'],
+            'predictions': preds.tolist(),
+            'true_values': val_labels_layer.tolist(),
+            'validation_indices': val_indices
+        })
+    
+    # Save validation data to JSON with top 5 predictions
+    print("\nSaving validation data to JSON...")
+    validation_data = {
+        'trace_id': trace['id'],
+        'trace_idx': trace_idx,
+        'original_values': {
+            'm': trace['m'],
+            'ke': trace['ke'],
+            'v': trace['v'],
+            'd': trace['d']
+        },
+        'variations': val_variations,
+        'velocities': val_velocities.tolist(),
+        'n_samples': len(val_variations),
+        'top_5_predictions': top_5_predictions
+    }
+    val_data_file = trace_plots_dir / 'validation_data.json'
+    with open(val_data_file, 'w') as f:
+        json.dump(validation_data, f, indent=2)
+    print(f"Saved validation data to: {val_data_file}")
+    
+    print("\nTop 5 Predictions:")
+    for i, pred_info in enumerate(top_5_predictions):
+        print(f"  {i+1}. Token {pred_info['token_pos']} ('{pred_info['token']}'), Layer {pred_info['layer']}")
+        print(f"     R²={pred_info['val_r2']:.4f}, MAE={pred_info['val_mae']:.2f}, MPE={pred_info['val_mpe']:.1f}%")
+    print()
+
+    # ==========================================
+    # SAVE PROBES
+    # ==========================================
+
+    print("Saving trained probes...")
+    for token_pos in probes:
+        for layer in probes[token_pos]:
+            probe_filename = trace_probes_dir / f"probe_token{token_pos}_layer{layer}.joblib"
+            joblib.dump(probes[token_pos][layer], probe_filename)
+    print(f"Saved {sum(len(probes[tp]) for tp in probes)} probes to: {trace_probes_dir}")
+    print()
+
+    # ==========================================
+    # VISUALIZATION
+    # ==========================================
+
+    print("="*80)
+    print("GENERATING VISUALIZATIONS")
+    print("="*80)
+
+    # Create heatmap showing validation R² across token positions and layers
+    token_positions = sorted(probes.keys())
+    r2_matrix = np.zeros((len(LAYERS_TO_PROBE), len(token_positions)))
+    mae_matrix = np.zeros((len(LAYERS_TO_PROBE), len(token_positions)))
+    mpe_matrix = np.zeros((len(LAYERS_TO_PROBE), len(token_positions)))
+
+    for i, layer in enumerate(LAYERS_TO_PROBE):
+        for j, token_pos in enumerate(token_positions):
+            if layer in results[token_pos]:
+                r2_matrix[i, j] = results[token_pos][layer]['val_r2']
+                mae_matrix[i, j] = results[token_pos][layer]['val_mae']
+                mpe_matrix[i, j] = results[token_pos][layer]['val_mpe']
+            else:
+                r2_matrix[i, j] = np.nan
+                mae_matrix[i, j] = np.nan
+                mpe_matrix[i, j] = np.nan
+
+    # Create token labels for x-axis
+    def is_numeric_token(token_str):
+        """Check if token represents a number."""
+        # Remove spaces and check if it's a number
+        cleaned = token_str.strip()
+        try:
+            float(cleaned)
+            return True
+        except ValueError:
+            # Check for scientific notation parts
+            if any(c in cleaned for c in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']):
+                # Check if it's mostly numeric
+                numeric_chars = sum(c.isdigit() for c in cleaned)
+                if numeric_chars / max(len(cleaned), 1) > 0.5:
+                    return True
+            return False
+
+    token_labels = []
+    for pos in token_positions:
+        if pos < len(example_token_strs):
+            token_str = example_token_strs[pos]
+            # Truncate long tokens
+            if len(token_str) > 8:
+                token_str = token_str[:6] + '..'
+            # Tag numeric tokens
+            if is_numeric_token(token_str):
+                token_labels.append(f'[NUM]')
+            else:
+                token_labels.append(token_str)
         else:
-            location = f"GENERATED (token {min_error_pos - layer_data['prompt_length']})"
-        
-        print(f"  Layer {layer}: Best prediction at {location}, error={min_error:.2f}")
-        
-        if layer_data['first_close_prompt'] is not None:
-            print(f"    -> First close in PROMPT at token {layer_data['first_close_prompt']}")
-        elif layer_data['first_close_generated'] is not None:
-            print(f"    -> First close in GENERATED at token {layer_data['first_close_generated']}")
-        else:
-            print(f"    -> Never gets close to true value")
+            token_labels.append(f'{pos}')
 
-# ==========================================
-# VISUALIZATION
-# ==========================================
+    # Plot 1: R² heatmap
+    fig, ax = plt.subplots(1, 1, figsize=(20, 12))
 
-print("\nGenerating visualizations...")
+    im = ax.imshow(r2_matrix, aspect='auto', cmap='viridis', vmin=0, vmax=1)
+    ax.set_xlabel('Token Position', fontsize=14)
+    ax.set_ylabel('Layer', fontsize=14)
+    ax.set_title(f'Linear Probe Performance (Val R²) - Trace {trace_idx}\n{EXPERIMENT.capitalize()}', 
+                 fontsize=16, fontweight='bold')
 
-# For each sample, create a plot showing predictions across tokens
-for sample_idx, sample_result in enumerate(cot_results):
-    prompt_id = sample_result['prompt_id']
-    true_value = sample_result['true_value']
-    
-    fig, axes = plt.subplots(len(LAYERS_TO_TEST), 1, figsize=(16, 3*len(LAYERS_TO_TEST)))
-    if len(LAYERS_TO_TEST) == 1:
-        axes = [axes]
-    
-    for layer_idx, layer in enumerate(LAYERS_TO_TEST):
-        ax = axes[layer_idx]
-        layer_data = sample_result['layers'][layer]
-        
-        predictions = layer_data['predictions']
-        prompt_length = layer_data['prompt_length']
-        
-        # Plot predictions
-        token_positions = np.arange(len(predictions))
-        ax.plot(token_positions, predictions, 'b-', alpha=0.6, linewidth=1)
-        
-        # Highlight prompt vs generated
-        ax.axvspan(0, prompt_length, alpha=0.1, color='green', label='Prompt')
-        ax.axvspan(prompt_length, len(predictions), alpha=0.1, color='orange', label='Generated')
-        
-        # True value line
-        ax.axhline(y=true_value, color='r', linestyle='--', linewidth=2, label=f'True Value ({true_value:.1f})')
-        
-        # Mark when prediction gets close
-        min_error_pos = layer_data['min_error_position']
-        ax.axvline(x=min_error_pos, color='purple', linestyle=':', linewidth=2, alpha=0.7, label='Best Prediction')
-        ax.scatter([min_error_pos], [predictions[min_error_pos]], color='purple', s=100, zorder=5)
-        
-        ax.set_xlabel('Token Position', fontsize=11)
-        ax.set_ylabel('Probe Prediction', fontsize=11)
-        ax.set_title(f'Layer {layer}: Predictions Across Tokens', fontsize=12)
-        ax.legend(fontsize=9)
-        ax.grid(True, alpha=0.3)
-    
-    plt.suptitle(f'Sample {sample_idx + 1} (Format {prompt_id}): Probe Predictions During CoT Generation', fontsize=14)
+    # Set ticks
+    layer_tick_step = max(1, len(LAYERS_TO_PROBE) // 20)
+    ax.set_yticks(range(0, len(LAYERS_TO_PROBE), layer_tick_step))
+    ax.set_yticklabels([f'L{LAYERS_TO_PROBE[i]}' for i in range(0, len(LAYERS_TO_PROBE), layer_tick_step)])
+
+    token_tick_step = max(1, len(token_positions) // 20)
+    ax.set_xticks(range(0, len(token_positions), token_tick_step))
+    ax.set_xticklabels([f'{token_labels[i]}' for i in range(0, len(token_positions), token_tick_step)], rotation=45, ha='right')
+
+    # Add text annotations with values on ALL layers and ALL tokens
+    text_sample_layer = 1
+    text_sample_token = 1
+    for i in range(0, len(LAYERS_TO_PROBE), text_sample_layer):
+        for j in range(0, len(token_positions), text_sample_token):
+            if not np.isnan(r2_matrix[i, j]):
+                text_color = 'white' if r2_matrix[i, j] < 0.5 else 'black'
+                ax.text(j, i, f'{r2_matrix[i, j]:.2f}', ha='center', va='center',
+                       color=text_color, fontsize=5, fontweight='bold')
+
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Validation R²', fontsize=13)
+
     plt.tight_layout()
-    plt.savefig(PLOTS_DIR / f'cot_predictions_sample_{sample_idx}_format_{prompt_id}.png', dpi=150, bbox_inches='tight')
-    print(f"  Saved: {PLOTS_DIR / f'cot_predictions_sample_{sample_idx}_format_{prompt_id}.png'}")
+    plt.savefig(trace_plots_dir / 'r2_heatmap_all_layers.png', dpi=200, bbox_inches='tight')
+    print(f"Saved: {trace_plots_dir / 'r2_heatmap_all_layers.png'}")
     plt.close()
 
-# Summary plot: mean predictions for prompt vs generated tokens across layers
-fig, axes = plt.subplots(1, len(test_prompts), figsize=(6*len(test_prompts), 6))
-if len(test_prompts) == 1:
-    axes = [axes]
+    # Plot 2: MAE heatmap
+    fig, ax = plt.subplots(1, 1, figsize=(20, 12))
 
-for sample_idx, sample_result in enumerate(cot_results):
-    ax = axes[sample_idx]
-    prompt_id = sample_result['prompt_id']
-    true_value = sample_result['true_value']
-    
-    prompt_means = []
-    generated_means = []
-    
-    for layer in LAYERS_TO_TEST:
-        layer_data = sample_result['layers'][layer]
-        prompt_means.append(layer_data['prompt_mean'])
-        generated_means.append(layer_data['generated_mean'])
-    
-    x = np.arange(len(LAYERS_TO_TEST))
-    width = 0.35
-    
-    ax.bar(x - width/2, prompt_means, width, label='Prompt Tokens', alpha=0.7)
-    ax.bar(x + width/2, generated_means, width, label='Generated Tokens', alpha=0.7)
-    ax.axhline(y=true_value, color='r', linestyle='--', linewidth=2, label=f'True Value ({true_value:.1f})')
-    
-    ax.set_xlabel('Layer', fontsize=12)
-    ax.set_ylabel('Mean Prediction', fontsize=12)
-    ax.set_title(f'Format {prompt_id} (True: {true_value:.1f})', fontsize=13)
-    ax.set_xticks(x)
-    ax.set_xticklabels(LAYERS_TO_TEST)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3, axis='y')
+    # Use log scale for MAE to see variation better
+    mae_matrix_masked = np.where(np.isnan(mae_matrix), np.inf, mae_matrix)
+    vmax = np.percentile(mae_matrix_masked[mae_matrix_masked < np.inf], 95)
 
-plt.suptitle(f'Mean Probe Predictions: Prompt vs Generated Tokens', fontsize=15)
-plt.tight_layout()
-plt.savefig(PLOTS_DIR / 'mean_predictions_summary.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: {PLOTS_DIR / 'mean_predictions_summary.png'}")
-plt.close()
+    im = ax.imshow(mae_matrix, aspect='auto', cmap='viridis_r', vmin=0, vmax=vmax)
+    ax.set_xlabel('Token Position', fontsize=14)
+    ax.set_ylabel('Layer', fontsize=14)
+    ax.set_title(f'Linear Probe MAE Across Layers and Token Positions\n{EXPERIMENT.capitalize()}', 
+             fontsize=16, fontweight='bold')
 
-print(f"\n{'='*60}")
-print(f"ANALYSIS COMPLETE")
-print(f"{'='*60}")
-print(f"All visualizations saved to: {PLOTS_DIR}")
-print(f"Detailed results saved to: {results_file}")
-print(f"{'='*60}")
+    ax.set_yticks(range(0, len(LAYERS_TO_PROBE), layer_tick_step))
+    ax.set_yticklabels([f'L{LAYERS_TO_PROBE[i]}' for i in range(0, len(LAYERS_TO_PROBE), layer_tick_step)])
+
+    ax.set_xticks(range(0, len(token_positions), token_tick_step))
+    ax.set_xticklabels([f'{token_labels[i]}' for i in range(0, len(token_positions), token_tick_step)], rotation=45, ha='right')
+
+    # Add text annotations with values on ALL layers and ALL tokens
+    for i in range(0, len(LAYERS_TO_PROBE), text_sample_layer):
+        for j in range(0, len(token_positions), text_sample_token):
+            if not np.isnan(mae_matrix[i, j]) and mae_matrix[i, j] < np.inf:
+                text_color = 'white' if mae_matrix[i, j] > vmax * 0.5 else 'black'
+                ax.text(j, i, f'{mae_matrix[i, j]:.1f}', ha='center', va='center',
+                       color=text_color, fontsize=5, fontweight='bold')
+
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Mean Absolute Error', fontsize=13)
+
+    plt.tight_layout()
+    plt.savefig(trace_plots_dir / 'mae_heatmap_all_layers.png', dpi=200, bbox_inches='tight')
+    print(f"Saved: {trace_plots_dir / 'mae_heatmap_all_layers.png'}")
+    plt.close()
+
+    # Plot 2b: MPE heatmap (NEW)
+    fig, ax = plt.subplots(1, 1, figsize=(20, 12))
+
+    # Use percentile for MPE to see variation better
+    mpe_matrix_masked = np.where(np.isnan(mpe_matrix), np.inf, mpe_matrix)
+    vmax_mpe = np.percentile(mpe_matrix_masked[mpe_matrix_masked < np.inf], 95)
+
+    im = ax.imshow(mpe_matrix, aspect='auto', cmap='viridis_r', vmin=0, vmax=vmax_mpe)
+    ax.set_xlabel('Token Position', fontsize=14)
+    ax.set_ylabel('Layer', fontsize=14)
+    ax.set_title(f'Linear Probe Mean Percent Error Across Layers and Token Positions\n{EXPERIMENT.capitalize()}', 
+             fontsize=16, fontweight='bold')
+
+    ax.set_yticks(range(0, len(LAYERS_TO_PROBE), layer_tick_step))
+    ax.set_yticklabels([f'L{LAYERS_TO_PROBE[i]}' for i in range(0, len(LAYERS_TO_PROBE), layer_tick_step)])
+
+    ax.set_xticks(range(0, len(token_positions), token_tick_step))
+    ax.set_xticklabels([f'{token_labels[i]}' for i in range(0, len(token_positions), token_tick_step)], rotation=45, ha='right')
+
+    # Add text annotations with values on ALL layers and ALL tokens
+    for i in range(0, len(LAYERS_TO_PROBE), text_sample_layer):
+        for j in range(0, len(token_positions), text_sample_token):
+            if not np.isnan(mpe_matrix[i, j]) and mpe_matrix[i, j] < np.inf:
+                text_color = 'white' if mpe_matrix[i, j] > vmax_mpe * 0.5 else 'black'
+                ax.text(j, i, f'{mpe_matrix[i, j]:.0f}%', ha='center', va='center',
+                       color=text_color, fontsize=5, fontweight='bold')
+
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Mean Percent Error (%)', fontsize=13)
+
+    plt.tight_layout()
+    plt.savefig(trace_plots_dir / 'mpe_heatmap_all_layers.png', dpi=200, bbox_inches='tight')
+    print(f"Saved: {trace_plots_dir / 'mpe_heatmap_all_layers.png'}")
+    plt.close()
+
+    # Plot 3: Max R² across layers for each token position
+    max_r2_per_token = []
+    max_layer_per_token = []
+
+    for token_pos in token_positions:
+        valid_r2s = [(layer, results[token_pos][layer]['val_r2']) 
+                     for layer in LAYERS_TO_PROBE if layer in results[token_pos]]
+        if valid_r2s:
+            best_layer, best_r2 = max(valid_r2s, key=lambda x: x[1])
+            max_r2_per_token.append(best_r2)
+            max_layer_per_token.append(best_layer)
+        else:
+            max_r2_per_token.append(0)
+            max_layer_per_token.append(0)
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(16, 10))
+
+    # Top plot: Max R² per token
+    ax1.plot(token_positions, max_r2_per_token, 'b-', linewidth=2)
+    ax1.set_xlabel('Token Position', fontsize=13)
+    ax1.set_ylabel('Max Validation R² (across layers)', fontsize=13)
+    ax1.set_title('Best Probe Performance at Each Token Position', fontsize=14, fontweight='bold')
+    ax1.grid(True, alpha=0.3)
+
+    # Bottom plot: Which layer achieves max R²
+    ax2.scatter(token_positions, max_layer_per_token, c=max_r2_per_token, cmap='viridis', s=50, alpha=0.7)
+    ax2.set_xlabel('Token Position', fontsize=13)
+    ax2.set_ylabel('Best Layer', fontsize=13)
+    ax2.set_title('Which Layer Achieves Best Performance at Each Position', fontsize=14, fontweight='bold')
+    ax2.grid(True, alpha=0.3, axis='y')
+
+    cbar = plt.colorbar(ax2.collections[0], ax=ax2)
+    cbar.set_label('Validation R²', fontsize=12)
+
+    plt.tight_layout()
+    plt.savefig(trace_plots_dir / 'max_r2_per_token.png', dpi=200, bbox_inches='tight')
+    print(f"Saved: {trace_plots_dir / 'max_r2_per_token.png'}")
+    plt.close()
+
+    # Plot 4: Selected layers comparison
+    selected_layers_to_plot = [0, 15, 31, 47, 63]  # Early, middle, late layers
+    selected_layers_to_plot = [l for l in selected_layers_to_plot if l in LAYERS_TO_PROBE]
+
+    fig, ax = plt.subplots(1, 1, figsize=(16, 8))
+
+    for layer in selected_layers_to_plot:
+        r2_values = [results[tok][layer]['val_r2'] if layer in results[tok] else 0 
+                     for tok in token_positions]
+        ax.plot(token_positions, r2_values, linewidth=2, label=f'Layer {layer}', alpha=0.8)
+
+    ax.set_xlabel('Token Position', fontsize=13)
+    ax.set_ylabel('Validation R²', fontsize=13)
+    ax.set_title('Probe Performance Across Token Positions (Selected Layers)', fontsize=14, fontweight='bold')
+    ax.legend(fontsize=11)
+    ax.grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(trace_plots_dir / 'r2_selected_layers.png', dpi=200, bbox_inches='tight')
+    print(f"Saved: {trace_plots_dir / 'r2_selected_layers.png'}")
+    plt.close()
+
+    # ==========================================
+    # SAVE RESULTS
+    # ==========================================
+
+    # Save summary statistics
+    summary = {
+        'experiment': EXPERIMENT,
+        'trace_id': trace['id'],
+        'trace_idx': trace_idx,
+        'n_total_traces': len(all_traces),
+        'n_variations': len(variations),
+        'n_train': len(train_variations),
+        'n_val': len(val_variations),
+        'layers_probed': LAYERS_TO_PROBE,
+        'token_positions': token_positions,
+        'answer_token_position': answer_token_pos,
+        'best_results': {}
+    }
+
+    # Find overall best performance
+    best_overall_r2 = -1
+    best_overall_config = None
+
+    for token_pos in token_positions:
+        for layer in LAYERS_TO_PROBE:
+            if layer in results[token_pos]:
+                r2 = results[token_pos][layer]['val_r2']
+                if r2 > best_overall_r2:
+                    best_overall_r2 = r2
+                    best_overall_config = {
+                        'token_pos': token_pos,
+                        'layer': layer,
+                        'val_r2': r2,
+                        'val_mae': results[token_pos][layer]['val_mae'],
+                        'train_r2': results[token_pos][layer]['train_r2']
+                    }
+
+    summary['best_results']['overall'] = best_overall_config
+
+    # Save to JSON
+    results_file = trace_plots_dir / 'probe_results_summary.json'
+    with open(results_file, 'w') as f:
+        json.dump(summary, f, indent=2)
+
+    print(f"\nSaved summary: {results_file}")
+
+    print(f"\n{'='*80}")
+    print(f"EXPERIMENT COMPLETE FOR TRACE {trace_idx}")
+    print(f"{'='*80}")
+    print(f"Best overall performance:")
+    print(f"  Token position: {best_overall_config['token_pos']}")
+    print(f"  Layer: {best_overall_config['layer']}")
+    print(f"  Validation R²: {best_overall_config['val_r2']:.4f}")
+    print(f"  Validation MAE: {best_overall_config['val_mae']:.2f}")
+    print(f"  ('Answer' starts at token {answer_token_pos})")
+    print(f"\nAll visualizations saved to: {trace_plots_dir}")
+    print(f"\nAll probes saved to: {trace_probes_dir}")
+    print(f"{'='*80}\n")
+
+print(f"\n{'='*80}")
+print(f"ALL EXPERIMENTS COMPLETE")
+print(f"{'='*80}")
+print(f"Processed {len(TRACE_INDICES)} trace(s)")
+print(f"Results saved to: {PLOTS_DIR}")
+print(f"Probes saved to: {PROBES_DIR}")
+print(f"{'='*80}")
+
