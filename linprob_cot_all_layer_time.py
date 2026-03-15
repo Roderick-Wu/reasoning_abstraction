@@ -38,7 +38,7 @@ import joblib
 # ==========================================
 
 # Experiment Configuration
-EXPERIMENT = "velocity"  # Experiment type (determines which traces to load)
+EXPERIMENT = "velocity_uniform_t"  # Experiment type (determines which traces to load)
 TARGET_VARIABLE = "time"  # What we're probing for
 MODEL_PATH = "/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B"
 TRACES_DIR = Path(f"/home/wuroderi/scratch/reasoning_traces/Qwen2.5-32B/{EXPERIMENT}")
@@ -52,7 +52,7 @@ PROBES_DIR.mkdir(exist_ok=True)
 TRACE_INDICES = [0, 1, 2, 3, 4]  # Which pre-generated traces to use as base CoT outputs
 TRAIN_RATIO = 0.8  # 80% train, 20% validation
 NUM_VARIATIONS_PER_TRACE = 200  # Target number of synthetic variations per base trace
-TRUNCATE_AT_TOKEN_INDEX = [90, 95, 91, 88, 93]  # Token indices to truncate at (exclusive). None = auto-detect time variable
+TRUNCATE_AT_TOKEN_INDEX = None  # Token indices to truncate at (exclusive). None = auto-detect time variable
 
 # Model Configuration
 device = "cuda" if torch.cuda.is_available() else "cpu"

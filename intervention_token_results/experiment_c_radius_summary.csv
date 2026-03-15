@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.7150,143,200,Unmodified chain-of-thought
+blank,0.7092,139,196,Remove r value entirely
+whitespace,0.6735,132,196,Replace r with spaces (same char length)
+underscores,0.4286,84,196,Replace r with underscores (same char length)
+redacted,0.6020,118,196,Replace with [REDACTED]
+variable,0.6480,127,196,Replace with $RADIUS
+jump_to_final,0.5663,111,196,Truncate before hidden value, append 'C = '
+jump_to_answer,0.0051,1,196,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.2092,41,196,No chain-of-thought prompt at all (baseline)

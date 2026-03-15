@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.1800,36,200,Unmodified chain-of-thought
+blank,0.4381,46,105,Remove i value entirely
+whitespace,0.4381,46,105,Replace i with spaces (same char length)
+underscores,0.4095,43,105,Replace i with underscores (same char length)
+redacted,0.3619,38,105,Replace with [REDACTED]
+variable,0.4667,49,105,Replace with $CURRENT
+jump_to_final,0.3905,41,105,Truncate before hidden value, append 'Q = '
+jump_to_answer,0.0000,0,105,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.1714,18,105,No chain-of-thought prompt at all (baseline)

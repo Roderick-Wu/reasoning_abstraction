@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=reasoning_abstraction_generate_data
 #SBATCH --time=0-5:00:00 # D-HH:MM
-#SBATCH --account=def-zhijing
+#SBATCH --account=def-rgrosse
 #SBATCH --mem=512G
 #SBATCH --gpus-per-node=h100:2
 #SBATCH --cpus-per-task=1

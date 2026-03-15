@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.5300,106,200,Unmodified chain-of-thought
+blank,0.7518,103,137,Remove v value entirely
+whitespace,0.7591,104,137,Replace v with spaces (same char length)
+underscores,0.5547,76,137,Replace v with underscores (same char length)
+redacted,0.6715,92,137,Replace with [REDACTED]
+variable,0.7299,100,137,Replace with $VELOCITY
+jump_to_final,0.6058,83,137,Truncate before hidden value, append 't = '
+jump_to_answer,0.0000,0,137,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.1679,23,137,No chain-of-thought prompt at all (baseline)

@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.2778,25,90,Unmodified chain-of-thought
+blank,0.1111,10,90,v = <empty>
+whitespace,0.1111,10,90,v = <spaces>
+underscores,0.0444,4,90,v = ___
+redacted,0.0444,4,90,v = [REDACTED]
+variable,0.0222,2,90,v = $VELOCITY
+jump_to_t,0.1000,9,90,skip to t = 
+jump_to_answer,0.0222,2,90,skip to The answer is
+no_cot,0.0000,0,57,no chain-of-thought

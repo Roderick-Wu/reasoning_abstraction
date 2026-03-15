@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.570000,,,,Unmodified CoT baseline
+censoring_masking,blank,174,0.528736,0.000000,nan,nan,Remove x value entirely
+censoring_masking,whitespace,174,0.545977,0.000000,nan,nan,Replace x with spaces
+censoring_masking,underscores,174,0.454023,0.000000,nan,nan,Replace x with underscores
+censoring_masking,redacted,174,0.580460,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,174,0.551724,0.000000,nan,nan,Replace hidden value with $DISPLACEMENT
+value_patching,patch_from_trace,174,0.218391,0.086207,0.366906,0.309490,Patch hidden value from another trace
+value_patching,patch_zero,174,0.189655,0.000000,0.643411,0.650205,Patch hidden value to 0
+value_patching,patch_pos_inf,174,0.413793,0.218391,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,174,0.327586,0.270115,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,174,0.212644,0.034483,0.072464,0.051053,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,174,0.666667,0.000000,nan,nan,Truncate before hidden value, append 'PE = '
+truncation,jump_to_answer,174,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,174,0.109195,0.000000,nan,nan,No chain-of-thought prompt baseline

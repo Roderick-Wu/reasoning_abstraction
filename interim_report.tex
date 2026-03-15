@@ -1,0 +1,600 @@
+\documentclass[11pt]{article}
+
+% Change "review" to "final" to generate the final (sometimes called camera-ready) version.
+% Change to "preprint" to generate a non-anonymous version with page numbers.
+%\usepackage[review]{acl}
+\usepackage[preprint]{acl}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out,
+% but it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+%Including images in your LaTeX document requires adding
+%additional package(s)
+\usepackage{graphicx}
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{Instructions for *ACL Proceedings}
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+% \author{Author 1 \and ... \and Author n \\
+%         Address line \\ ... \\ Address line}
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a separate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\}
+
+%\author{
+%  \textbf{First Author\textsuperscript{1}},
+%  \textbf{Second Author\textsuperscript{1,2}},
+%  \textbf{Third T. Author\textsuperscript{1}},
+%  \textbf{Fourth Author\textsuperscript{1}},
+%\\
+%  \textbf{Fifth Author\textsuperscript{1,2}},
+%  \textbf{Sixth Author\textsuperscript{1}},
+%  \textbf{Seventh Author\textsuperscript{1}},
+%  \textbf{Eighth Author \textsuperscript{1,2,3,4}},
+%\\
+%  \textbf{Ninth Author\textsuperscript{1}},
+%  \textbf{Tenth Author\textsuperscript{1}},
+%  \textbf{Eleventh E. Author\textsuperscript{1,2,3,4,5}},
+%  \textbf{Twelfth Author\textsuperscript{1}},
+%\\
+%  \textbf{Thirteenth Author\textsuperscript{3}},
+%  \textbf{Fourteenth F. Author\textsuperscript{2,4}},
+%  \textbf{Fifteenth Author\textsuperscript{1}},
+%  \textbf{Sixteenth Author\textsuperscript{1}},
+%\\
+%  \textbf{Seventeenth S. Author\textsuperscript{4,5}},
+%  \textbf{Eighteenth Author\textsuperscript{3,4}},
+%  \textbf{Nineteenth N. Author\textsuperscript{2,5}},
+%  \textbf{Twentieth Author\textsuperscript{1}}
+%\\
+%\\
+%  \textsuperscript{1}Affiliation 1,
+%  \textsuperscript{2}Affiliation 2,
+%  \textsuperscript{3}Affiliation 3,
+%  \textsuperscript{4}Affiliation 4,
+%  \textsuperscript{5}Affiliation 5
+%\\
+%  \small{
+%    \textbf{Correspondence:} \href{mailto:email@domain}{email@domain}
+%  }
+%}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}
+
+Large Language Models (LLMs) have demonstrated remarkable capabilities in complex reasoning tasks, from solving mathematical problems to generating code. However, the mechanisms underlying these capabilities remain largely opaque. While explicit "Chain-of-Thought" (CoT) prompting encourages models to verbalize their reasoning steps, recent findings suggest that models also perform significant implicit reasoning within their internal activations -- and much of this information is interpretable. This research investigates the relation between the two and traces causal mechanisms in latent space as well as CoT during the process of solving mathematics and physics problems. 
+
+Specifically, we examine LLMs problem solving capability during multi-step problems where those variables are required but not explicitly requested. This forces the model to create both latent and CoT token representations for causal variables. We utilize various high-school level mathematics and physics problems, with topics including geometry, kinematics, electromagnetism, and economics.  Consider the prompt: "A $m$ kg object has $T$ Joules of kinetic energy. How long does it take to travel $d$ meters?" To solve for time ($t$), the model must first derive the velocity ($v$) using the relation $v = \sqrt{2 \cdot T / m}$, yet the prompt never asks for velocity, nor does the model necessarily output it in a standard completion. Previous work would suggest that the model computes a vector representation of $v$ in its residual stream to serve as a bridge for calculating $t$. However, it is unclear as to whether the emergence of semantic meaning corresponds with computation itself. Furthermore, if CoT output is permitted, the model should also explicitly mention and compute this value -- providing both implicit and explicit representations of the same information. Specifically, this thesis poses a new framing to answer the following questions regarding the interplay of implicit and explicit reasoning:
+
+\begin{itemize}
+    \item \textbf{Is CoT text acting as a strictly necessary memory buffer, or merely providing computation cycles?} By truncating CoT traces at various stages, we investigate whether the model's capacity to solve a problem requires producing explicit intermediate tokens, or if the preceding sequence's primary function is merely building requisite latent structure. 
+    \item \textbf{When confronted with both latent-space abstractions and explicit CoT token representations of a hidden variable, which is causally responsible for downstream success?} We aim to isolate the causal role of explicit text versus internal latent activations. Does the model "read" its own numerical output, or does it rely entirely on the high-dimensional abstract representation formed internally?
+\end{itemize}
+
+Our findings reveal a surprising dichotomy: while the sequential rollout of CoT steps leading up to the hidden variable is strictly necessary (accuracy drops to 0\% if truncated prematurely), the \textit{explicit token representation} of the variable calculation itself is largely redundant. By forcefully corrupting or masking the outputted hidden variable tokens, we demonstrate that the model continues to solve the problem successfully, heavily relying on a robust, implicitly formed latent representation. 
+
+We begin by identifying these abstraction layers using vocabulary-space projection and extracting numerical values via linear probing. While linear probes exhibit low absolute accuracy—indicating a complex or non-linear encoding of physical variables—causal mediation and activation patching verify that these abstracted representations are highly causally implicated in the model's final response.
+
+This work, like the broader field of mechanistic interpretability, aims to identify causal mechanisms inside of LLMs in order to better understand their internal computation. Specifically, this thesis targets broadening general understanding in LLMs during the multi-step reasoning process. This interim report aims to provide an overview of the goals and strategy employed by this thesis. Furthermore, we include a summary of related research and the existing progress to date. 
+
+\section{Related Work}
+
+% https://arxiv.org/abs/1706.03762
+
+\subsection{Large Language Models}
+Large language models (LLMs) have emerged to the frontier of modern natural language processing (NLP), driving rapid advances across tasks such as language understanding, generation, reasoning, and multimodal interaction. Built primarily on the transformer architecture by Vaswani et al. \cite{DBLP:journals/corr/VaswaniSPUJGKP17}, LLMs have largely supplanted earlier sequence modeling approaches based on recurrent neural networks (RNNs) and long short-term memory (LSTM) networks. Their ability to scale effectively with data, model size, and compute has positioned them at the forefront of NLP research and deployment, enabling performance that was previously impossible with past architectures.
+
+Early transformer-based models demonstrated the power of large-scale pretraining on unlabeled text followed by task-specific fine-tuning. A key milestone was the development of generative pre-trained transformers, which showed that autoregressive language modeling could yield rich, transferable representations. Models such as GPT-3 demonstrated that sufficiently large LLMs -- GPT-3 boasted 175 billion parameters -- can perform tasks in a zero-shot or few-shot manner. More recent milestones include instruction-tuned and reinforcement learning–aligned models, which improved controllability, safety, and usability, as well as the extension of LLMs to multimodal settings incorporating vision, audio, and action.
+
+Today, LLMs serve as foundational models underpinning a broad ecosystem of applications, from conversational agents and code generation to scientific reasoning and embodied AI. Their dominance reflects both architectural advantages over earlier recurrent models and a shift toward data- and compute-driven approaches to language understanding. As research continues, key challenges include interpretability, robustness, efficiency, and alignment, but LLMs remain the defining technology shaping the current and future landscape of NLP.
+
+\subsubsection{Transformer Architecture}
+
+The transformer architecture forms the backbone of modern large language models, providing a scalable and expressive framework for sequence modeling without recurrence or convolution. At a high level, a transformer maps a sequence of discrete tokens into continuous vector representations via an embedding layer, processes these representations through a stack of transformer blocks composed of self-attention and multilayer perceptrons (MLPs), and finally projects the resulting hidden states back into the vocabulary space through an unembedding layer to produce output token probabilities. Although the specific implementation varies subtly between models (choice of skip connections, non-linear functions, etc.), the core structure is constant across all implementations. 
+
+Given an input sequence of tokens $\{t_1, t_2, \dots, t_n\}$ from a vocabulary $\mathcal{V}$, each token is first mapped to a dense vector using a learned embedding matrix $E \in \mathbb{R}^{|\mathcal{V}| \times d_{\text{model}}}$. This yields an embedded sequence 
+\[
+\{x_1, x_2, \dots, x_n\}, \quad x_i = E[t_i], \quad x_i \in \mathbb{R}^{d_{\text{model}}}.\]
+Because the transformer architecture itself is permutation-invariant, positional information is injected by adding positional embeddings $p_i$, resulting in the initial hidden states
+\[
+h_i^{(0)} = x_i + p_i.
+\]
+These representations serve as the input to the first transformer block.
+
+A transformer consists of $L$ identical blocks stacked sequentially. Each block is composed of two main sublayers: a multi-head self-attention layer and an MLP layer, with residual connections and layer normalization applied throughout. For a given layer $\ell$, the input hidden states $h^{(\ell-1)}$ are first processed by self-attention. For each attention head, queries, keys, and values are computed as linear projections:
+\[
+Q = h^{(\ell-1)} W_Q, \quad K = h^{(\ell-1)} W_K, \quad V = h^{(\ell-1)} W_V.
+\]
+Self-attention then computes weighted combinations of values based on pairwise token interactions:
+\[
+\text{Attn}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d}}\right)V
+\]
+Multi-head attention concatenates the outputs of multiple such heads, enabling the model to attend to different relational patterns in parallel. This mechanism allows each token to directly incorporate information from all other tokens in the sequence, effectively modeling long-range dependencies.
+
+The output of the attention layer is passed through an MLP, typically consisting of two linear transformations with a nonlinearity:
+\[
+\text{MLP}(h) = W_2 \sigma(W_1 h + b_1) + b_2,
+\]
+where $\sigma$ is commonly a GELU activation. Importantly, the MLP operates independently on each token position, complementing self-attention’s token-to-token interactions with expressive local transformations. The outputs of each transformer block, ${h_i^{(1)}, \dots, h_i^{(L)}}$ are commonly referred to as the residual stream. Studying these activations allows us to investigate the flow of information during the model's forward pass. 
+
+After passing through the final transformer block, the resulting hidden states $h^{(L)}$ are projected back into the vocabulary space using an unembedding matrix $W_U \in \mathbb{R}^{d_{\text{model}} \times |\mathcal{V}|}$:
+\[
+\ell_i = h_i^{(L)} W_U.
+\]
+These logits are converted into a probability distribution over the next token via the softmax function. In autoregressive language models, this distribution is trained to match $p(t_{i+1} \mid t_1, \dots, t_i)$, enabling sequential generation. For generation, the next token is then sampled from this distribution. Combined with scaling laws, transformers can generate coherent text useful for a wide range of tasks. 
+
+
+
+
+
+
+\subsection{Mechanistic Interpretability}
+
+Mechanistic interpretability is a research field focused on understanding how neural networks, particularly LLMs, implement computations internally by analyzing their learned representations, circuits, and algorithms at the level of neurons, attention heads, and layers. Rather than treating models as black boxes and evaluating them only by input–output behavior, mechanistic interpretability aims to reverse-engineer model components to identify how specific features, concepts, or reasoning steps are encoded and combined. This approach draws inspiration from neuroscience and seeks to produce causal, fine-grained explanations of model behavior. This enables transparency, debugging, reliability, and alignment of large-scale models. 
+
+Recent advancements in mechanistic interpretability have begun to focus on identifying structured knowledge from residual stream activations. This section reviews existing literature which focuses on extracting hidden/inferred variables as well as identifying their causal role in the language model outputs. 
+
+
+\subsubsection{Latent Space Probing and Intervention}
+
+% https://arxiv.org/pdf/1610.01644
+% https://arxiv.org/abs/1711.10203
+% https://aclanthology.org/P17-1080/
+% https://aclanthology.org/2020.acl-main.420/
+% https://aclanthology.org/2020.acl-main.383/
+% https://arxiv.org/abs/2401.03735
+% https://arxiv.org/abs/2410.11781
+% https://arxiv.org/abs/2505.18235
+
+Early work by Alain et al. \cite{alain2016understanding} used linear probing in order to identify interpretable features in latent space of neural networks. This work is extended to various architectures by Hupkes et al. \cite{hupkes2018visualisation}, Belinkov et al. \cite{belinkov-etal-2017-neural}, Pimentel et al. \cite{pimentel-etal-2020-information}, and Wu et al. \cite{wu-etal-2020-perturbed}. Perhaps more important to our applications, Zhu et al. \cite{zhu2024language} discover that language models have the ability to encode numeric values linearly. By using probes on arithmetic questions, their work demonstrates the ability to decode and intervene on these representations. This finding is critical to the methods we aim to employ. Levy et al. \cite{levy2025language} further study this phenomenon and suggest that language models store numerical information in base 10. Modell et al. \cite{modell2025origins} extend this work by challenging the linear representation hypothesis -- suggesting that representations may be encoded on any arbitrarily shaped continuous manifold. 
+
+% https://arxiv.org/abs/2311.01460
+% https://transformer-circuits.pub/2021/framework/index.html
+% https://arxiv.org/abs/2106.02997
+Another branch of research closely related to our work concerns actual reasoning interpretability in latent space. Deng et al. \cite{deng2023implicit} tune models to use latent space as a substitute for CoT outputs. Another important batch of research includes Anthropic's major work on transformer circuits \cite{elhage2021mathematical}. This field of work has established the fact that LLMs use localized interpretable algorithms in order to accomplish tasks. Geiger et al. \cite{geiger2021causal} further investigate latent space reasoning by mapping models to causal algorithms. Devising a method called Distributed Alignment Search, their work is able to identify activation subspaces that correspond to causal variables. 
+
+Despite these, msot of our patching work closely aligns with that of Bronzini et al. \cite{bronzini2024unveiling}. In this work, they use activatino patching to influence multi-hop reasoning outputs -- similar to our goals. 
+
+%Geiger causal abstractions?
+
+\subsubsection{State Representations and Emergent World Models}
+
+% https://arxiv.org/abs/2201.02177
+% https://arxiv.org/abs/2301.05217
+
+To extract a specific hidden variables, we rely on the hypothesis that LLMs maintain coherent internal state representations of the underlying task. Early discoveries into "Grokking" indicated that LLMs eventually learn the "true algorithm" for a given task given enough time. This phenomena was discovered early on in work by Power et al. \cite{power2022grokking}, Nanda et al. \cite{nanda2023progress} further isolated a specific cases where a model was able to learn a deterministic algorithm for modular addition. 
+
+% https://arxiv.org/abs/2210.13382
+% https://arxiv.org/abs/2310.02207
+
+Beyond isolated tasks, Li et al. \cite{li2022emergent} provided the seminal demonstration of this phenomenon. They trained a model solely on text sequences of Othello (a board game) moves and, using non-linear probes, discovered that the model spontaneously learned an explicit representation of the 2D board state within its activation space. Gurnee et al. \cite{gurnee2023language} uncover similar truths for more grounded real-world phenomena -- space and time. 
+
+\subsection{LLM Reasoning}
+For our research, we are particularly interested in the ability of LLMs to reason in contexts where a conclusion must be drawn from a series of solutions to intermediate sub-problems. In the context of fact-recall, this is known as multi-hop reasoning. Multi-hop reasoning combined with reasoning in CoT contexts serve as foundational research for our work. 
+
+\subsubsection{Reasoning in Chain-of-Thought}
+
+% https://arxiv.org/abs/2201.11903
+% https://arxiv.org/pdf/2205.10625
+% https://arxiv.org/abs/2305.10601
+% https://arxiv.org/abs/2308.09687
+% https://arxiv.org/abs/2501.12948
+
+Since its inception, CoT prompting has been extensively studied as a method for improving LLM reasoning capability. Work by Wei et al. \cite{wei2022chain} drew significant attention to CoT prompting and highlighted the improved capabilities of LLMs under such contexts. Since then, research by Zhou et al. \cite{zhou2022least}, Yao et al. \cite{yao2023tree}, Besta et al. \cite{besta2024graph} and many more works have sought out methods to improve this process. Work by Guo et al. \cite{guo2025deepseek} has sparked investigation into further refinement of this process using reinforcement learning. 
+
+% https://aclanthology.org/2024.findings-emnlp.882.pdf
+% https://arxiv.org/pdf/2510.07364
+
+Another direction of closely related work studies potential misalignment between model's CoT output and its final response. Insights from this line of work contributes to our existing knowledge of CoT and opportunities for investigation. Paul et al. \cite{paul-etal-2024-making} investigate how faithful CoT output is to the model's actual response. This work challenges the assumption that the CoT output is always causal to the model's ultimate response. Venhoff et al. \cite{venhoff2025base} employ methods to guide base models to reason in ways similar to fine-tuned reasoning models. 
+
+% https://arxiv.org/abs/2301.13379
+% https://arxiv.org/abs/2203.11171
+% https://arxiv.org/abs/2302.12822
+Other work that investigates CoT reasoning include Lyu et al. \cite{lyu2023faithful}, Wang et al. \cite{wang2022self}, and Shum et al. \cite{shum2023automatic}. This work focuses on methods of refining the process, not necessarily interpreting it. But findings from this direction of work have applications to this research's goals. 
+
+Crucially, an emerging hypothesis in the interpretability community suggests that the primary benefit of CoT is not the explicit text it produces, but rather the additional forward passes—the "compute"—it affords the model (Pfau et al., 2024). Our research seeks to empirically ground this hypothesis by systematically corrupting CoT tokens and measuring downstream performance.
+
+\subsubsection{Multi-Hop Reasoning}
+
+% https://arxiv.org/abs/2402.16837
+% https://arxiv.org/abs/2406.12775
+% https://arxiv.org/abs/2402.14328
+
+% https://arxiv.org/abs/2202.05262
+% https://arxiv.org/abs/2305.15054
+% https://arxiv.org/abs/2012.14913
+% https://arxiv.org/abs/2301.04213
+
+
+Yang et al. \cite{yang2024large} investigated whether LLMs perform multi-hop reasoning (e.g., “The mother of the singer of ‘Superstition’ is”, Superstition $\rightarrow$ Stevie Wonder $\rightarrow$ Lula) internally when prompts only request the final answer. This directly supports our hypothesis that an LLM might compute a hidden variable as an intermediate latent variable to solve for the target, even if the hidden variable is never explicitly mentioned. Biren et al. \cite{biran2024hopping} extend this work by identifying limitations in model ability to resolve these "hops". Li et al. \cite{li2024understanding} further investigate this direction and identify key failure points and patching methods to improve upon it. 
+
+More tangential work by Meng et al. \cite{meng2022locating} and Stolfo et al. \cite{stolfo2023mechanistic} show that factual associations relevant to multi-hop queries are often stored in localized subnetworks and that information is stored transiently across layers. Geva et al. \cite{geva2021transformer} investigate the role of MLP layers as key-value lookups. Hase et al. \cite{hase2023does} further this work by investigating the localization of facts to specific model parameters. 
+
+\section{Methodology}
+
+To investigate LLMs' ability to hidden physical variables, we employ a two-stage mechanistic interpretability approach: qualitative identification via Logit Lens and quantitative extraction via Supervised Probing. Verifying causal effect is performed with activation patching. We experiment with the Llama3 and Qwen2.5 series of models. 
+
+\subsection{Dataset Generation}
+We focus on a multi-step problems that requires an intermediate computation of a hidden variable. We construct a synthetic dataset using math and physics questions with a wide range of topics. Consider a simple dynamics problem: "A {m} kg object has {T} Joules of kinetic energy. How long does it take to travel {d} m?". The ground truth reasoning chain requires deriving velocity ($v$) from Kinetic Energy ($T$) and mass ($m$), and subsequently time ($t$) from distance ($d$) and $v$:$$v = \sqrt{\frac{2 \cdot T}{m}} \quad \xrightarrow{} \quad t = \frac{d}{v}$$We generate $N$ samples by randomly sampling $m$, $T$, and $d$ from uniform distributions. Crucially, to ensure our probes learn the causal variable $v$ rather than spurious correlations with the input features, we balance the dataset such that $v$ is not perfectly correlated with $T$ or $m$ alone (e.g., ensuring high $T$ does not always imply high $v$ by varying $m$ significantly).
+
+A limitation of prompting with questions of such complexity is that CoT output is necessary for the model to reliably solve the question. By forcing an immediate response (appending something like "Answer immediately without showing steps/reasoning"), the model's accuracy on these questions drops to near zero. By scaling up model size, the error can be decreased, but the responses are still almost certainly incorrect. 
+
+\subsection{Qualitative Identification}
+
+% https://arxiv.org/abs/2402.16837
+% https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens
+
+Before training probes, we verify if the model attends to the concept of velocity explicitly in its residual stream. We utilize the method used in the work by Yang et al. \cite{yang2024large} which is similar to the Logit Lens technique (nostalgebraist, 2020). Logit Lens interprets the hidden state $h_i^{(i)}$ of the model at layer $l$ by projecting it directly into the vocabulary space using the model's pre-trained unembedding matrix $W_U$. The method of interest, Entity Recall Score, is the application of this concept to the tokens of interest. Specifically, Entity Recall Score -- $\text{ENTREC}$ -- is formulated as the following. 
+
+$$\text{ENTREC}^l(e, \tau_{2H}) = \log \left( \text{softmax} \left( \text{LayerNorm} (h_l) \cdot W_U \right) \right)_{\text{index}(e_0)}$$
+
+
+% https://arxiv.org/abs/2203.14680 
+$e$ is referred to as the "bridge entity" of the two-hop prompt $\tau_{2H}$. In the prior example (“The mother of the singer of ‘Superstition’ is”, Superstition → Stevie Wonder → Lula), "Stevie Wonder" is the bridge entity. $e_0$ is the first token of the bridge entity. Work by Geva et al. \cite{geva2022transformer} indicates that this projection is able to identify interpretable attributes that are semantically relevant to the subject. 
+
+For our "velocity" example, we specifically monitor for the emergence of velocity-related terms (e.g., "speed", "velocity", "m/s") or tokens corresponding to the numeric value of $v$. A "heat spike" in the probability of these terms suggests the layer where the model is actively processing or retrieving the concept of velocity. 
+
+\subsection{Quantitative Extraction}
+To extract the precise numeric value of the hidden variable from latent space, we train supervised probes on the internal activations of the model. We run the generated dataset through the LLM and cache the residual stream activations $h_{i,l}$ for the $i$-th sample at layer $l$. We focus on the activations at the last token of the prompt (the end of the question). We train linear probes (ridge regression) as well as small MLPs to map the activation vector $h_{i,l}$ to the ground truth hidden variable $y_i$. Linear probes can generally be formulated as such:
+
+$$\hat{y} = \beta^T h + b$$
+
+$\hat{y}$ represents the probe's prediction of the hidden variable. $\beta$ and $b$ are the weights and bias of the linear probe respectively. $h$ is the input, which can be any activation. However, we only expect the probe to be accurate under certain conditions. We try to ensure that probes are only trained on a single layer, and tested on that same layer. Furthermore, when testing the probe can only be accurate on tokens after all of the required information is given -- the attention masks ensures that token activations can only be influenced by tokens before it. 
+
+For training the probes, we employ mean-squared-error loss with regularization (ridge regression). 
+
+$$\mathcal{L} = \sum_{i=1}^n (y-\hat{y})^2 + \lambda \beta^T\beta$$
+
+$\lambda$ is some hyperparameter for regularization. The probe is penalized for the growing size of the norm of $\beta$. 
+
+The probe is trained on a training split and evaluated on a held-out test split. Performance is measured using the Coefficient of Determination ($R^2$) and Mean Squared Error (MSE). A high $R^2$ score at a specific token and layer $l$ confirms that the information required to compute $v$ is linearly accessible in the model's latent space at that stage of processing.
+
+\subsection{Causal Intervention}
+Successful probing indicates a correlation between specific features and a desired target, but does not necessarily indicate that the model uses the information as hypothesized. We verify that the latent representation is accurate by patching in source representations and observing that the model's outputted value for the hidden variable changes accordingly. Specifically, we intervene at the specific layer and token identified to contain the desired information but substituting an activation from a source. 
+
+Define $f(X)$ as an LLM which can be decomposed into layers. $X \in \mathcal{R}^{N \times d_{model}}$ is the stacked representation for input tokens $\{x_1, x_2, \dots x_N\}$ -- where the $i$-th row of $X$ is equal to $x_i^T$. The model takes the last token and maps it through the unembedding matrix and softmax to yield $p = \text{softmax} (W_U h_N^L) \in \mathcal{R}^{\|\mathcal{V}\|}$, the distribution for the next token.  
+
+$$f(X) = f_L \circ f_{L-1}\circ \dots \circ f_1(X)$$
+
+Letting $h_i^l(x)$ represent the activation at layer $l$ for input embedding $x_i$. We can simplify the expression for the model. 
+
+$$f(x_i)=f_L \circ \dots \circ f_{l+1}(h_i^l)$$
+
+Given two seperate input token sets, we define a base input $\{x_1, x_2, \dots x_N\}$ and a source input $\{x_1', x_2', \dots x_N'\}$. The intervention is performed at layer $l$ on token $i$ by substitution of the source representation at that location ($h_i^l'$) into the base input. 
+
+$$f(x_i)=f_L \circ \dots \circ f_{l+1}(h_i^l')$$ 
+
+This alters the output distribution of the next token $p$. By comparing $p_{\text{base}}$ with $p_{\text{intervened}}$, we can determine the effect of the representation $h_i^l$. 
+
+\subsubsection{Investigating the Relation Between Latent and Token Representations}
+
+More interestingly, we aim to intervene on representations during the CoT output. For our "velocity" example, we identify the velocity value in the form of latent activations found by the probe and also as an explicit value stated in tokens in the CoT. We intervene on one of these representations. 
+
+For intervening on the latent representation, we allow the model to generate up to the point where the hidden variable value (velocity for this example) is explicitly stated. We then substitute in the source activation into its appropriate location -- in the same way we prove that the latent representation is used. Finally, we proceed to allow the model to finish its generation. 
+
+For intervening on the token representation, we allow the model to generate up to the point where the hidden variable value (velocity for this example) is explicitly stated. We swap the tokens for the velocity value with source tokens. Mathematically, this involves intervening on the set $\{x_1, x_2, \dots x_N\}$ during parts of the model's sequence generation. 
+
+Given an input sequence $\{x_1, x_2, \dots x_N\}$, each forward pass results in a new token added to the sequence. So to invervene, we first generate up to the desired point of intervention. The sequence is augmented to $\{x_1, x_2, \dots x_N, \dots x_{N+j} \dots x_{N+j+b}\}$, where the $b$ tokens $\{x_{N+j+1} \dots x_{N+j+b}\}$ represents the information that we would like to intervene on. We alter the sequence by substituting those tokens with a source representation $\{x_{N+j+1}' \dots x_{N+j+b}'\}$. The input sequence continues as $\{x_1, x_2, \dots x_N, \dots x_{N+j+1}' \dots x_{N+j+b}'\}$. Finally, we proceed to allow the model to finish its generation. 
+
+\subsection{CoT Truncation and Token Masking}
+
+To formalize the distinction between CoT as a compute buffer vs. a memory buffer, we employ two additional interventional setups:
+\begin{itemize}
+    \item \textbf{Early CoT Termination}: We provide the model with a partial CoT trace, incrementally revealing tokens up to the point where the hidden variable is calculated, and force the model to answer the question immediately. By measuring accuracy across truncation lengths, we determine the exact moment the latent answer converges.
+    \item \textbf{Token Masking}: We intervene on the explicit token representation of the hidden variable computation by forcefully replacing the numeric tokens (e.g., $52.8$) with masks (underscores), random generic variables (e.g., \texttt{\$VELOCITY}), or corrupted values. 
+\end{itemize}
+
+\section{Preliminary Results}
+
+Our initial experiments yield several key insights across our interpretability pipeline:
+
+\begin{itemize}
+    \item \textbf{Localized Concept Emergence}: Qualitative mapping via the ENTREC score successfully identifies localized "heat" tracking the semantic concept of physical variables, such as velocity, emerging prior to computation.
+    \item \textbf{Probe Convergence}: Linear probing over the CoT tokens leading up to the hidden variable's output reveals that probes converge toward the true continuous physical value. However, average probe accuracy on test data plateaued within $\sim10\%$ of the ground truth. While indicative of robust feature presence, this suggests the model may utilize a more complex, dense, or non-linear encoding for exact floating-point numerical values.
+    \item \textbf{Causal Mediation}: Iterative activation patching across all layers and sequence positions identifies tight, localized causal pathways. Specific activation substitutions significantly shift the log probabilities of the final output, verifying the latent variables' causal role in calculation.
+    \item \textbf{Robustness via Token Patching}: When intervening precisely on the CoT tokens where the velocity value is normally declared, we observed profound causal robustness. Swapping the explicit numeric value to another plausible number predictably shifts the final answer. More surprisingly, aggressively masking the value with underscores, redacted tokens, or literal text like \texttt{\$VELOCITY} does not severely compromise the model's accuracy. This strongly implies the presence of an uninterrupted underlying latent representation that drives generation, circumventing the explicit textual sequence.
+    \item \textbf{Early CoT Truncation Dynamics}: When feeding the model progressively longer segments of a correct CoT trace and forcing an immediate answer, zero-shot accuracy remains near zero until the exact step where the velocity value is evaluated in the text. At that exact sequence boundary, accuracy instantaneously jumps to near $100\%$. 
+\end{itemize}
+
+\section{Discussion}
+
+The results of these experiments paint a compelling picture of how Large Language Models manage mathematical sub-goals conceptually:
+
+\begin{itemize}
+    \item \textbf{CoT as Compute, Not Memory}: The early truncation results indicate that the sequence of computational steps prior to the hidden variable calculation is strictly necessary. The model uses the preceding steps to build an internal state representation. However, the token patching resilience indicates the model \textit{does not read its own generated number} back from the context window to solve the rest of the problem. It relies on the latent state built \textit{during} the generative steps.
+    \item \textbf{Latent Abstract Manifolds}: Given the relatively loose accuracy of purely linear probes ($\sim10\%$ error) contrasted against the high precision of causal mediation and token substitution, it is likely that numerical abstraction manifolds are highly non-linear or distributed in later layers, requiring methods beyond linear Ridge Regression (such as DAS) for perfect alignment.
+    \item \textbf{Interplay of Implicit and Explicit Spaces}: These findings bridge the gap between implicit reasoning and explicit CoT. The model maintains dual representations of the reasoning sequence: a shallow symbolic one in the tokens (which can be safely corrupted) and a deep semantic one in the residual stream (which is causally critical).
+\end{itemize}
+
+\section{Preamble}
+
+The first line of the file must be
+\begin{quote}
+\begin{verbatim}
+\documentclass[11pt]{article}
+\end{verbatim}
+\end{quote}
+
+To load the style file in the review version:
+\begin{quote}
+\begin{verbatim}
+\usepackage[review]{acl}
+\end{verbatim}
+\end{quote}
+For the final version, omit the \verb|review| option:
+\begin{quote}
+\begin{verbatim}
+\usepackage{acl}
+\end{verbatim}
+\end{quote}
+
+To use Times Roman, put the following in the preamble:
+\begin{quote}
+\begin{verbatim}
+\usepackage{times}
+\end{verbatim}
+\end{quote}
+(Alternatives like txfonts or newtx are also acceptable.)
+
+Please see the \LaTeX{} source of this document for comments on other packages that may be useful.
+
+Set the title and author using \verb|\title| and \verb|\author|. Within the author list, format multiple authors using \verb|\and| and \verb|\And| and \verb|\AND|; please see the \LaTeX{} source for examples.
+
+By default, the box containing the title and author names is set to the minimum of 5 cm. If you need more space, include the following in the preamble:
+\begin{quote}
+\begin{verbatim}
+\setlength\titlebox{<dim>}
+\end{verbatim}
+\end{quote}
+where \verb|<dim>| is replaced with a length. Do not set this length smaller than 5 cm.
+
+\section{Document Body}
+
+\subsection{Footnotes}
+
+Footnotes are inserted with the \verb|\footnote| command.\footnote{This is a footnote.}
+
+\subsection{Tables and figures}
+
+See Table~\ref{tab:accents} for an example of a table and its caption.
+\textbf{Do not override the default caption sizes.}
+
+\begin{table}
+  \centering
+  \begin{tabular}{lc}
+    \hline
+    \textbf{Command} & \textbf{Output} \\
+    \hline
+    \verb|{\"a}|     & {\"a}           \\
+    \verb|{\^e}|     & {\^e}           \\
+    \verb|{\`i}|     & {\`i}           \\
+    \verb|{\.I}|     & {\.I}           \\
+    \verb|{\o}|      & {\o}            \\
+    \verb|{\'u}|     & {\'u}           \\
+    \verb|{\aa}|     & {\aa}           \\\hline
+  \end{tabular}
+  \begin{tabular}{lc}
+    \hline
+    \textbf{Command} & \textbf{Output} \\
+    \hline
+    \verb|{\c c}|    & {\c c}          \\
+    \verb|{\u g}|    & {\u g}          \\
+    \verb|{\l}|      & {\l}            \\
+    \verb|{\~n}|     & {\~n}           \\
+    \verb|{\H o}|    & {\H o}          \\
+    \verb|{\v r}|    & {\v r}          \\
+    \verb|{\ss}|     & {\ss}           \\
+    \hline
+  \end{tabular}
+  \caption{Example commands for accented characters, to be used in, \emph{e.g.}, Bib\TeX{} entries.}
+  \label{tab:accents}
+\end{table}
+
+As much as possible, fonts in figures should conform
+to the document fonts. See Figure~\ref{fig:experiments} for an example of a figure and its caption.
+
+Using the \verb|graphicx| package graphics files can be included within figure
+environment at an appropriate point within the text.
+The \verb|graphicx| package supports various optional arguments to control the
+appearance of the figure.
+You must include it explicitly in the \LaTeX{} preamble (after the
+\verb|\documentclass| declaration and before \verb|\begin{document}|) using
+\verb|\usepackage{graphicx}|.
+
+\begin{figure}[t]
+  \includegraphics[width=\columnwidth]{example-image-golden}
+  \caption{A figure with a caption that runs for more than one line.
+    Example image is usually available through the \texttt{mwe} package
+    without even mentioning it in the preamble.}
+  \label{fig:experiments}
+\end{figure}
+
+\begin{figure*}[t]
+  \includegraphics[width=0.48\linewidth]{example-image-a} \hfill
+  \includegraphics[width=0.48\linewidth]{example-image-b}
+  \caption {A minimal working example to demonstrate how to place
+    two images side-by-side.}
+\end{figure*}
+
+\subsection{Hyperlinks}
+
+Users of older versions of \LaTeX{} may encounter the following error during compilation:
+\begin{quote}
+\verb|\pdfendlink| ended up in different nesting level than \verb|\pdfstartlink|.
+\end{quote}
+This happens when pdf\LaTeX{} is used and a citation splits across a page boundary. The best way to fix this is to upgrade \LaTeX{} to 2018-12-01 or later.
+
+\subsection{Citations}
+
+\begin{table*}
+  \centering
+  \begin{tabular}{lll}
+    \hline
+    \textbf{Output}           & \textbf{natbib command} & \textbf{ACL only command} \\
+    \hline
+    \citep{Gusfield:97}       & \verb|\citep|           &                           \\
+    \citealp{Gusfield:97}     & \verb|\citealp|         &                           \\
+    \citet{Gusfield:97}       & \verb|\citet|           &                           \\
+    \citeyearpar{Gusfield:97} & \verb|\citeyearpar|     &                           \\
+    \citeposs{Gusfield:97}    &                         & \verb|\citeposs|          \\
+    \hline
+  \end{tabular}
+  \caption{\label{citation-guide}
+    Citation commands supported by the style file.
+    The style is based on the natbib package and supports all natbib citation commands.
+    It also supports commands defined in previous ACL style files for compatibility.
+  }
+\end{table*}
+
+Table~\ref{citation-guide} shows the syntax supported by the style files.
+We encourage you to use the natbib styles.
+You can use the command \verb|\citet| (cite in text) to get ``author (year)'' citations, like this citation to a paper by \citet{Gusfield:97}.
+You can use the command \verb|\citep| (cite in parentheses) to get ``(author, year)'' citations \citep{Gusfield:97}.
+You can use the command \verb|\citealp| (alternative cite without parentheses) to get ``author, year'' citations, which is useful for using citations within parentheses (e.g. \citealp{Gusfield:97}).
+
+A possessive citation can be made with the command \verb|\citeposs|.
+This is not a standard natbib command, so it is generally not compatible
+with other style files.
+
+\subsection{References}
+
+\nocite{Ando2005,andrew2007scalable,rasooli-tetrault-2015}
+
+The \LaTeX{} and Bib\TeX{} style files provided roughly follow the American Psychological Association format.
+If your own bib file is named \texttt{custom.bib}, then placing the following before any appendices in your \LaTeX{} file will generate the references section for you:
+\begin{quote}
+\begin{verbatim}
+\bibliography{custom}
+\end{verbatim}
+\end{quote}
+
+You can obtain the complete ACL Anthology as a Bib\TeX{} file from \url{https://aclweb.org/anthology/anthology.bib.gz}.
+To include both the Anthology and your own .bib file, use the following instead of the above.
+\begin{quote}
+\begin{verbatim}
+\bibliography{anthology,custom}
+\end{verbatim}
+\end{quote}
+
+Please see Section~\ref{sec:bibtex} for information on preparing Bib\TeX{} files.
+
+\subsection{Equations}
+
+An example equation is shown below:
+\begin{equation}
+  \label{eq:example}
+  A = \pi r^2
+\end{equation}
+
+Labels for equation numbers, sections, subsections, figures and tables
+are all defined with the \verb|\label{label}| command and cross references
+to them are made with the \verb|\ref{label}| command.
+
+This an example cross-reference to Equation~\ref{eq:example}.
+
+\subsection{Appendices}
+
+Use \verb|\appendix| before any appendix section to switch the section numbering over to letters. See Appendix~\ref{sec:appendix} for an example.
+
+\section{Bib\TeX{} Files}
+\label{sec:bibtex}
+
+Unicode cannot be used in Bib\TeX{} entries, and some ways of typing special characters can disrupt Bib\TeX's alphabetization. The recommended way of typing special characters is shown in Table~\ref{tab:accents}.
+
+Please ensure that Bib\TeX{} records contain DOIs or URLs when possible, and for all the ACL materials that you reference.
+Use the \verb|doi| field for DOIs and the \verb|url| field for URLs.
+If a Bib\TeX{} entry has a URL or DOI field, the paper title in the references section will appear as a hyperlink to the paper, using the hyperref \LaTeX{} package.
+
+\section*{Limitations}
+
+This document does not cover the content requirements for ACL or any
+other specific venue.  Check the author instructions for
+information on
+maximum page lengths, the required ``Limitations'' section,
+and so on.
+
+\section*{Acknowledgments}
+
+This document has been adapted
+by Steven Bethard, Ryan Cotterell and Rui Yan
+from the instructions for earlier ACL and NAACL proceedings, including those for
+ACL 2019 by Douwe Kiela and Ivan Vuli\'{c},
+NAACL 2019 by Stephanie Lukin and Alla Roskovskaya,
+ACL 2018 by Shay Cohen, Kevin Gimpel, and Wei Lu,
+NAACL 2018 by Margaret Mitchell and Stephanie Lukin,
+Bib\TeX{} suggestions for (NA)ACL 2017/2018 from Jason Eisner,
+ACL 2017 by Dan Gildea and Min-Yen Kan,
+NAACL 2017 by Margaret Mitchell,
+ACL 2012 by Maggie Li and Michael White,
+ACL 2010 by Jing-Shin Chang and Philipp Koehn,
+ACL 2008 by Johanna D. Moore, Simone Teufel, James Allan, and Sadaoki Furui,
+ACL 2005 by Hwee Tou Ng and Kemal Oflazer,
+ACL 2002 by Eugene Charniak and Dekang Lin,
+and earlier ACL and EACL formats written by several people, including
+John Chen, Henry S. Thompson and Donald Walker.
+Additional elements were taken from the formatting instructions of the \emph{International Joint Conference on Artificial Intelligence} and the \emph{Conference on Computer Vision and Pattern Recognition}.
+
+% Bibliography entries for the entire Anthology, followed by custom entries
+%\bibliography{anthology,custom}
+% Custom bibliography entries only
+\bibliography{custom}
+
+\appendix
+
+\section{Example Appendix}
+\label{sec:appendix}
+
+This is an appendix.
+
+\end{document}

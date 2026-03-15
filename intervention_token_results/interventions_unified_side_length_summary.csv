@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.815000,,,,Unmodified CoT baseline
+censoring_masking,blank,190,0.836842,0.000000,nan,nan,Remove s value entirely
+censoring_masking,whitespace,190,0.915789,0.000000,nan,nan,Replace s with spaces
+censoring_masking,underscores,190,0.831579,0.000000,nan,nan,Replace s with underscores
+censoring_masking,redacted,190,0.868421,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,190,0.873684,0.000000,nan,nan,Replace hidden value with $SIDE
+value_patching,patch_from_trace,190,0.478947,0.073684,0.237288,0.204279,Patch hidden value from another trace
+value_patching,patch_zero,190,0.363158,0.000000,0.516667,0.518325,Patch hidden value to 0
+value_patching,patch_pos_inf,190,0.773684,0.036842,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,190,0.821053,0.036842,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,190,0.721053,0.000000,0.000000,0.001026,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,190,0.936842,0.000000,nan,nan,Truncate before hidden value, append 'SA = '
+truncation,jump_to_answer,190,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,190,0.536842,0.000000,nan,nan,No chain-of-thought prompt baseline

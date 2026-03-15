@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.8000,160,200,Unmodified chain-of-thought
+blank,0.7619,16,21,Remove market_cap value entirely
+whitespace,0.7143,15,21,Replace market_cap with spaces (same char length)
+underscores,0.8095,17,21,Replace market_cap with underscores (same char length)
+redacted,0.7143,15,21,Replace with [REDACTED]
+variable,0.8095,17,21,Replace with $MARKET_CAP
+jump_to_final,0.7619,16,21,Truncate before hidden value, append 'P/E = '
+jump_to_answer,0.0476,1,21,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.4286,9,21,No chain-of-thought prompt at all (baseline)

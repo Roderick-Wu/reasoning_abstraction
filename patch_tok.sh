@@ -19,4 +19,5 @@ source venv/bin/activate
 
 pip install -e ../TransformerLens
 
-python intervention_token.py
+#python intervention_token.py
+python intervention_token_c.py

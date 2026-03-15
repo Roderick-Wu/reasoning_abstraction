@@ -1,0 +1,565 @@
+[
+  {
+    "base_trace_idx": 0,
+    "base_trace_id": 0,
+    "format_id": 0,
+    "n_variations": 100,
+    "max_k": 68,
+    "candidate_count": 199,
+    "failure_reasons": {},
+    "summary_rows": [
+      {
+        "base_trace_idx": 0,
+        "k": 0,
+        "word_just_added": "(none)",
+        "accuracy": 0.02,
+        "n_correct": 2,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 1,
+        "word_just_added": "1)",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 2,
+        "word_just_added": "The",
+        "accuracy": 0.04,
+        "n_correct": 4,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 3,
+        "word_just_added": "distance",
+        "accuracy": 0.03,
+        "n_correct": 3,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 4,
+        "word_just_added": "between",
+        "accuracy": 0.04,
+        "n_correct": 4,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 5,
+        "word_just_added": "two",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 6,
+        "word_just_added": "consecutive",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 7,
+        "word_just_added": "crests",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 8,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 9,
+        "word_just_added": "the",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 10,
+        "word_just_added": "wavelength.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 11,
+        "word_just_added": "2)",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 12,
+        "word_just_added": "The",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 13,
+        "word_just_added": "wavelength",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 14,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 15,
+        "word_just_added": "equal",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 16,
+        "word_just_added": "to",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 17,
+        "word_just_added": "the",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 18,
+        "word_just_added": "speed",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 19,
+        "word_just_added": "divided",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 20,
+        "word_just_added": "by",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 21,
+        "word_just_added": "the",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 22,
+        "word_just_added": "frequency.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 23,
+        "word_just_added": "3)",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 24,
+        "word_just_added": "The",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 25,
+        "word_just_added": "distance",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 26,
+        "word_just_added": "between",
+        "accuracy": 0.02,
+        "n_correct": 2,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 27,
+        "word_just_added": "5",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 28,
+        "word_just_added": "consecutive",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 29,
+        "word_just_added": "crests",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 30,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 31,
+        "word_just_added": "4",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 32,
+        "word_just_added": "times",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 33,
+        "word_just_added": "the",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 34,
+        "word_just_added": "wavelength.",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 35,
+        "word_just_added": "4)",
+        "accuracy": 0.09,
+        "n_correct": 9,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 36,
+        "word_just_added": "The",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 37,
+        "word_just_added": "wavelength",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 38,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 39,
+        "word_just_added": "40",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 40,
+        "word_just_added": "m/s",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 41,
+        "word_just_added": "divided",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 42,
+        "word_just_added": "by",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 43,
+        "word_just_added": "5",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 44,
+        "word_just_added": "Hz",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 45,
+        "word_just_added": "=",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 46,
+        "word_just_added": "8",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 47,
+        "word_just_added": "m.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 48,
+        "word_just_added": "5)",
+        "accuracy": 0.02,
+        "n_correct": 2,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 49,
+        "word_just_added": "The",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 50,
+        "word_just_added": "distance",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 51,
+        "word_just_added": "between",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 52,
+        "word_just_added": "5",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 53,
+        "word_just_added": "consecutive",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 54,
+        "word_just_added": "crests",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 55,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 56,
+        "word_just_added": "4",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 57,
+        "word_just_added": "times",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 58,
+        "word_just_added": "8",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 59,
+        "word_just_added": "m",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 60,
+        "word_just_added": "=",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 61,
+        "word_just_added": "32",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 62,
+        "word_just_added": "m.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 63,
+        "word_just_added": "So",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 64,
+        "word_just_added": "the",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 65,
+        "word_just_added": "final",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 66,
+        "word_just_added": "answer",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 67,
+        "word_just_added": "is",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 68,
+        "word_just_added": "32.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      }
+    ]
+  }
+]

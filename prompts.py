@@ -65,6 +65,57 @@ def gen_implicit_velocity_from_ke(samples_per_prompt):
     return prompts_data
 
 
+def gen_implicit_velocity_from_ke_uniform_t(samples_per_prompt):
+    """
+    Moving mass with kinetic energy → velocity (hidden) → travel time
+    Bridge: KE, mass → velocity → time
+
+    Unlike gen_implicit_velocity_from_ke which samples v and d uniformly
+    (making t = d/v follow a heavy-tailed ratio distribution), this version
+    samples t, d, and m uniformly so that the target variable (time) is
+    uniformly distributed.  Velocity and kinetic energy are derived:
+        v  = d / t
+        ke = 0.5 * m * v²
+    """
+    prompts_data = []
+
+    objects = ["mass", "car", "train", "ball", "runner", "plane", "rocket", "vehicle"]
+    prompt_formats = [
+        "A {m} kg {obj} has {ke} Joules of kinetic energy. How long does it take to travel {d} m?",
+        "Given a {m} kg {obj} with {ke} Joules of kinetic energy, calculate the duration required to cover a distance of {d} m.",
+        "The {obj} weighs {m} kg and possesses {ke} Joules of kinetic energy. What is the time needed to traverse {d} m?",
+        "Mass: {m} kg, Kinetic Energy: {ke} Joules. Determine the time interval necessary for this {obj} to displace {d} m.",
+        "Consider a {m} kg {obj} with {ke} Joules of kinetic energy. Find the number of seconds needed to move {d} m."
+    ]
+
+    for format_id, prompt_format in enumerate(prompt_formats):
+        for _ in range(samples_per_prompt):
+            # Sample t, d, m uniformly → t (time) is the target, uniform by construction
+            t = np.random.randint(5, 51)       # time in seconds: 5–50
+            d = np.random.randint(10, 501)     # distance in metres: 10–500
+            m = np.random.randint(5, 51)       # mass in kg: 5–50
+            obj = np.random.choice(objects)
+
+            v = d / t                          # hidden variable: velocity (m/s)
+            ke = 0.5 * m * (v ** 2)            # kinetic energy (J)
+
+            prompt = "Question: " + prompt_format.format(m=m, obj=obj, ke=f"{ke:.3e}", d=d) + " Answer (step-by-step): "
+
+            prompts_data.append({
+                'prompt': prompt,
+                'format_id': format_id,
+                'object': obj,
+                'm': m,
+                'ke': ke,
+                'd': d,
+                't': t,
+                'v': v,           # Hidden variable (float)
+                'expected_time': float(t)
+            })
+
+    return prompts_data
+
+
 def gen_implicit_velocity_from_ke_momentum(samples_per_prompt):
     """
     KE to Momentum: "An object of mass m has Kinetic Energy K. What is its momentum?"
@@ -1267,6 +1318,7 @@ def get_all_generators():
     return {
         # Velocity as hidden variable
         'velocity_from_ke': gen_implicit_velocity_from_ke,
+        'velocity_from_ke_uniform_t': gen_implicit_velocity_from_ke_uniform_t,
         'velocity_from_ke_momentum': gen_implicit_velocity_from_ke_momentum,
         'velocity_from_momentum': gen_implicit_velocity_from_momentum,
         'velocity_from_energy_conservation': gen_implicit_velocity_from_energy_conservation,

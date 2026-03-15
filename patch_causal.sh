@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=reasoning_abstraction
-#SBATCH --time=0-10:00:00 # D-HH:MM
-#SBATCH --account=def-zhijing
-#SBATCH --mem=512G
-#SBATCH --gpus-per-node=h100:2
+#SBATCH --time=0-8:00:00 # D-HH:MM
+#SBATCH --account=def-rgrosse
+#SBATCH --mem=256G
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --cpus-per-task=1
 
 #salloc --account=def-zhijing --mem=512G --gpus=h100:2

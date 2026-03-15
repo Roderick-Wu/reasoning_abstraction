@@ -1,0 +1,13 @@
+[
+  {
+    "base_trace_idx": 26,
+    "base_trace_id": 26,
+    "format_id": 0,
+    "n_variations": 10,
+    "max_k": 46,
+    "candidate_count": 199,
+    "failure_reasons": {},
+    "summary_rows": [],
+    "requested_base_trace_idx": 0
+  }
+]

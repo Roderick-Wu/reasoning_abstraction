@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.5700,114,200,Unmodified chain-of-thought
+blank,0.4249,82,193,Remove x value entirely
+whitespace,0.4041,78,193,Replace x with spaces (same char length)
+underscores,0.3212,62,193,Replace x with underscores (same char length)
+redacted,0.3212,62,193,Replace with [REDACTED]
+variable,0.3368,65,193,Replace with $DISPLACEMENT
+jump_to_final,0.4197,81,193,Truncate before hidden value, append 'PE = '
+jump_to_answer,0.0052,1,193,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.1295,25,193,No chain-of-thought prompt at all (baseline)

@@ -145,10 +145,51 @@ def find_velocity_in_text(text: str, velocity: float) -> Optional[int]:
     
     return None
 
+def format_value_like_reference(reference: str, value: float) -> str:
+    """Format a numeric value using the same textual style as a reference string."""
+    if 'e' in reference.lower():
+        mantissa, exponent = re.split(r'[eE]', reference)
+        decimal_places = len(mantissa.split('.')[1]) if '.' in mantissa else 0
+        formatted = f"{value:.{decimal_places}e}"
+        return formatted.upper() if 'E' in reference else formatted
+
+    if '.' in reference:
+        decimal_places = len(reference.split('.')[1])
+        return f"{value:.{decimal_places}f}"
+
+    return f"{value:.0f}"
+
+def replace_formatted_value_occurrences(text: str, old_value: float, new_value: float,
+                                       offset: int = 0) -> Tuple[str, List[Tuple[int, int, str, str]]]:
+    """Replace numeric substrings that match a value when rendered in their existing format."""
+    numeric_pattern = re.compile(r'(?<![\w.])[-+]?(?:\d+\.\d+|\d+|\.\d+)(?:[eE][+-]?\d+)?(?![\w.])')
+
+    replacements = []
+    result_parts = []
+    last_end = 0
+
+    for match in numeric_pattern.finditer(text):
+        token = match.group()
+        if format_value_like_reference(token, old_value) != token:
+            continue
+
+        replacement = format_value_like_reference(token, new_value)
+
+        result_parts.append(text[last_end:match.start()])
+        result_parts.append(replacement)
+        replacements.append((offset + match.start(), offset + match.end(), token, replacement))
+        last_end = match.end()
+
+    if not replacements:
+        return text, []
+
+    result_parts.append(text[last_end:])
+    return ''.join(result_parts), replacements
+
 def replace_all_numeric_occurrences(text: str, old_ke: float, new_ke: float, 
                                    old_mass: float, new_mass: float) -> Tuple[str, List[Tuple[int, int, str, str]]]:
     """
-    Replace all occurrences of KE and mass values in text.
+    Replace all occurrences of KE and mass values in text, plus derived v^2 values in the CoT.
     Handles both scientific notation and decimal representations.
     First replaces in prompt, then only searches in CoT (after 'Answer (step-by-step): ').
     
@@ -177,6 +218,9 @@ def replace_all_numeric_occurrences(text: str, old_ke: float, new_ke: float,
         f"{new_ke:.3e}",
         str(int(new_ke)) if new_ke == int(new_ke) else str(new_ke),
     ]
+
+    old_v_squared = (2 * old_ke) / old_mass
+    new_v_squared = (2 * new_ke) / new_mass
     
     old_mass_str = str(int(old_mass))
     new_mass_str = str(int(new_mass))
@@ -219,6 +263,15 @@ def replace_all_numeric_occurrences(text: str, old_ke: float, new_ke: float,
     for match in re.finditer(rf'\b{old_mass_str}\b', result_cot):
         replacements.append((cot_offset + match.start(), cot_offset + match.end(), old_mass_str, new_mass_str))
     result_cot = re.sub(rf'\b{old_mass_str}\b', new_mass_str, result_cot)
+
+    # Replace explicit derived v^2 values in CoT while preserving the original number format.
+    result_cot, v_squared_replacements = replace_formatted_value_occurrences(
+        result_cot,
+        old_value=old_v_squared,
+        new_value=new_v_squared,
+        offset=cot_offset
+    )
+    replacements.extend(v_squared_replacements)
     
     return result_prompt + result_cot, replacements
 

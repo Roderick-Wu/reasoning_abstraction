@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.420000,,,,Unmodified CoT baseline
+censoring_masking,blank,182,0.439560,0.000000,nan,nan,Remove wavelength value entirely
+censoring_masking,whitespace,182,0.445055,0.000000,nan,nan,Replace wavelength with spaces
+censoring_masking,underscores,182,0.373626,0.000000,nan,nan,Replace wavelength with underscores
+censoring_masking,redacted,182,0.461538,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,182,0.439560,0.000000,nan,nan,Replace hidden value with $WAVELENGTH
+value_patching,patch_from_trace,182,0.263736,0.137363,0.306358,0.250442,Patch hidden value from another trace
+value_patching,patch_zero,182,0.164835,0.000000,0.634286,0.603408,Patch hidden value to 0
+value_patching,patch_pos_inf,182,0.368132,0.214286,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,182,0.390110,0.115385,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,182,0.302198,0.054945,0.169811,0.081788,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,182,0.428571,0.000000,nan,nan,Truncate before hidden value, append 'd = '
+truncation,jump_to_answer,182,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,182,0.109890,0.000000,nan,nan,No chain-of-thought prompt baseline

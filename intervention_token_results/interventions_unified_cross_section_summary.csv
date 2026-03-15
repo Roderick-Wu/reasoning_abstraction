@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.520000,,,,Unmodified CoT baseline
+censoring_masking,blank,40,0.925000,0.000000,nan,nan,Remove area value entirely
+censoring_masking,whitespace,40,0.925000,0.000000,nan,nan,Replace area with spaces
+censoring_masking,underscores,40,0.725000,0.000000,nan,nan,Replace area with underscores
+censoring_masking,redacted,40,0.825000,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,40,0.900000,0.000000,nan,nan,Replace hidden value with $AREA
+value_patching,patch_from_trace,40,0.300000,0.350000,0.421053,0.430013,Patch hidden value from another trace
+value_patching,patch_zero,40,0.100000,0.000000,0.864865,0.844913,Patch hidden value to 0
+value_patching,patch_pos_inf,40,0.775000,0.050000,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,40,0.775000,0.050000,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,40,0.150000,0.125000,0.128205,0.144689,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,40,0.700000,0.000000,nan,nan,Truncate before hidden value, append 'V = '
+truncation,jump_to_answer,40,0.050000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,40,0.225000,0.000000,nan,nan,No chain-of-thought prompt baseline

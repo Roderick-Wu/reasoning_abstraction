@@ -1,0 +1,109 @@
+[
+  {
+    "base_trace_idx": 0,
+    "base_trace_id": 0,
+    "format_id": 0,
+    "n_variations": 100,
+    "max_k": 11,
+    "candidate_count": 199,
+    "failure_reasons": {},
+    "summary_rows": [
+      {
+        "base_trace_idx": 0,
+        "k": 0,
+        "word_just_added": "(none)",
+        "accuracy": 0.4,
+        "n_correct": 40,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 1,
+        "word_just_added": "199",
+        "accuracy": 0.11,
+        "n_correct": 11,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 2,
+        "word_just_added": "*",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 3,
+        "word_just_added": "152",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 4,
+        "word_just_added": "=",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 5,
+        "word_just_added": "30248.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 6,
+        "word_just_added": "30248",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 7,
+        "word_just_added": "/",
+        "accuracy": 0.26,
+        "n_correct": 26,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 8,
+        "word_just_added": "1260.3",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 9,
+        "word_just_added": "=",
+        "accuracy": 0.01,
+        "n_correct": 1,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 10,
+        "word_just_added": "24.",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      },
+      {
+        "base_trace_idx": 0,
+        "k": 11,
+        "word_just_added": "So",
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_total": 100
+      }
+    ]
+  }
+]

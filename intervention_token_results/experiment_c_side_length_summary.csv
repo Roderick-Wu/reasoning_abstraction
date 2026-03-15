@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.8150,163,200,Unmodified chain-of-thought
+blank,0.7360,145,197,Remove s value entirely
+whitespace,0.7563,149,197,Replace s with spaces (same char length)
+underscores,0.6599,130,197,Replace s with underscores (same char length)
+redacted,0.7208,142,197,Replace with [REDACTED]
+variable,0.7462,147,197,Replace with $SIDE
+jump_to_final,0.7411,146,197,Truncate before hidden value, append 'SA = '
+jump_to_answer,0.0000,0,197,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.5431,107,197,No chain-of-thought prompt at all (baseline)

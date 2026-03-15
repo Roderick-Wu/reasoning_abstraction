@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.715000,,,,Unmodified CoT baseline
+censoring_masking,blank,193,0.735751,0.000000,nan,nan,Remove r value entirely
+censoring_masking,whitespace,193,0.735751,0.000000,nan,nan,Replace r with spaces
+censoring_masking,underscores,193,0.637306,0.000000,nan,nan,Replace r with underscores
+censoring_masking,redacted,193,0.621762,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,193,0.678756,0.000000,nan,nan,Replace hidden value with $RADIUS
+value_patching,patch_from_trace,193,0.409326,0.233161,0.308140,0.263426,Patch hidden value from another trace
+value_patching,patch_zero,193,0.388601,0.010363,0.472393,0.391828,Patch hidden value to 0
+value_patching,patch_pos_inf,193,0.554404,0.186528,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,193,0.414508,0.145078,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,193,0.430052,0.020725,0.048780,0.059226,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,193,0.689119,0.000000,nan,nan,Truncate before hidden value, append 'C = '
+truncation,jump_to_answer,193,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,193,0.212435,0.000000,nan,nan,No chain-of-thought prompt baseline

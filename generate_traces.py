@@ -199,6 +199,7 @@ print(f"Generating {args.n_prompts} prompts...")
 # Map common experiment names to their prompt generator names
 experiment_mapping = {
     'velocity': 'velocity_from_ke',
+    'velocity_uniform_t': 'velocity_from_ke_uniform_t',
     'current': 'current_from_power',
     'radius': 'radius_from_area',
     'side_length': 'side_length_from_volume',

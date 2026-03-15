@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.4200,84,200,Unmodified chain-of-thought
+blank,0.3401,67,197,Remove wavelength value entirely
+whitespace,0.3198,63,197,Replace wavelength with spaces (same char length)
+underscores,0.2995,59,197,Replace wavelength with underscores (same char length)
+redacted,0.2487,49,197,Replace with [REDACTED]
+variable,0.3401,67,197,Replace with $WAVELENGTH
+jump_to_final,0.2792,55,197,Truncate before hidden value, append 'd = '
+jump_to_answer,0.0000,0,197,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.1066,21,197,No chain-of-thought prompt at all (baseline)

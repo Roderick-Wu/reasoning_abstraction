@@ -1,0 +1,10 @@
+condition,accuracy,correct,total,description
+unmod_cot,0.5200,104,200,Unmodified chain-of-thought
+blank,0.7831,65,83,Remove area value entirely
+whitespace,0.7711,64,83,Replace area with spaces (same char length)
+underscores,0.6627,55,83,Replace area with underscores (same char length)
+redacted,0.6506,54,83,Replace with [REDACTED]
+variable,0.8193,68,83,Replace with $AREA
+jump_to_final,0.6506,54,83,Truncate before hidden value, append 'V = '
+jump_to_answer,0.1205,10,83,Truncate before hidden value, append '\nThe answer is '
+no_cot,0.2530,21,83,No chain-of-thought prompt at all (baseline)

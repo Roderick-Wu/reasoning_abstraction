@@ -1,0 +1,16 @@
+block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
+baseline,unmod_cot,200,0.800000,,,,Unmodified CoT baseline
+censoring_masking,blank,4,0.500000,0.000000,nan,nan,Remove market_cap value entirely
+censoring_masking,whitespace,4,0.500000,0.000000,nan,nan,Replace market_cap with spaces
+censoring_masking,underscores,4,0.500000,0.000000,nan,nan,Replace market_cap with underscores
+censoring_masking,redacted,4,0.500000,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,4,0.500000,0.000000,nan,nan,Replace hidden value with $MARKET_CAP
+value_patching,patch_from_trace,4,0.250000,0.000000,0.500000,0.000000,Patch hidden value from another trace
+value_patching,patch_zero,4,0.250000,0.000000,0.250000,0.287499,Patch hidden value to 0
+value_patching,patch_pos_inf,4,0.000000,0.250000,nan,nan,Patch hidden value to infinity token
+value_patching,patch_neg_inf,4,0.000000,0.500000,nan,nan,Patch hidden value to negative infinity token
+value_patching,patch_large_random,4,0.250000,0.000000,0.000000,0.009136,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,4,0.750000,0.000000,nan,nan,Truncate before hidden value, append 'P/E = '
+truncation,jump_to_answer,4,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
+The answer is '
+baseline,no_cot,4,0.000000,0.000000,nan,nan,No chain-of-thought prompt baseline
