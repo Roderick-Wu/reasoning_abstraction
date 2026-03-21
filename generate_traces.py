@@ -6,7 +6,8 @@ This script generates chain-of-thought responses for physics problems and saves:
 2. Token sequences
 3. Prompt metadata (variables, hidden variables, expected answers)
 
-The traces are saved to ~/scratch/reasoning_traces/<model_name>/ for later analysis.
+The traces are saved to ~/links/scratch/reasoning_traces/<model_name>/ when
+available, otherwise ~/scratch/reasoning_traces/<model_name>/.
 
 Usage:
     python generate_traces.py --experiment velocity --n_prompts 250
@@ -28,8 +29,13 @@ import prompts
 parser = argparse.ArgumentParser()
 parser.add_argument('--experiment', type=str, default='velocity', 
                     help='Experiment type: velocity, current, etc.')
+
+repo_root = Path(__file__).resolve().parent.parent
+default_model_path = repo_root / 'models' / 'Qwen2.5-72B'
+
 parser.add_argument('--model_path', type=str, 
-                    default='/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B')
+                    default=str(default_model_path),
+                    help='Path to local HF model directory')
 parser.add_argument('--n_prompts', type=int, default=250,
                     help='Number of prompts to generate (will be split across formats)')
 parser.add_argument('--max_new_tokens', type=int, default=256,
@@ -45,7 +51,11 @@ torch.manual_seed(args.seed)
 
 # Output directory
 model_name = Path(args.model_path).name
-OUTPUT_DIR = Path.home() / 'scratch' / 'reasoning_traces' / model_name / args.experiment
+scratch_root = Path.home() / 'links' / 'scratch'
+if not scratch_root.exists():
+    scratch_root = Path.home() / 'scratch'
+
+OUTPUT_DIR = scratch_root / 'reasoning_traces' / model_name / args.experiment
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 
 print("="*70)

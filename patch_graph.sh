@@ -8,17 +8,15 @@
 
 #salloc --account=def-zhijing --mem=512G --gpus=h100:2
 
+set -euo pipefail
+
+cd "${SLURM_SUBMIT_DIR:-$PWD}"
+
 # Load required modules
-#module load python/3.11.5
-#module load cuda/12.6
-#module load scipy-stack/2023b
-#module load arrow/21.0.0
-module load python cuda scipy-stack arrow
+#module load python cuda scipy-stack arrow
+module load python/3.11.5 cuda/12.6 scipy-stack/2023b arrow/21.0.0
 
 source venv/bin/activate
 
-pip install -e ../TransformerLens
-
-#python intervene_causal_mediation.py
-python intervene_causal_mediation_2.py
+python intervene_graph.py
 

@@ -25,19 +25,59 @@ from typing import Dict, List, Optional, Tuple
 
 
 EXPERIMENT_CONFIGS: Dict[str, Dict[str, str]] = {
-    "velocity": {"hidden_var_key": "v", "answer_key": "expected_time", "final_symbol": "t = "},
-    "current": {"hidden_var_key": "i", "answer_key": "expected_charge", "final_symbol": "Q = "},
-    "radius": {"hidden_var_key": "r", "answer_key": "expected_circumference", "final_symbol": "C = "},
-    "side_length": {"hidden_var_key": "s", "answer_key": "expected_surface_area", "final_symbol": "SA = "},
-    "wavelength": {"hidden_var_key": "wavelength", "answer_key": "expected_distance", "final_symbol": "d = "},
-    "cross_section": {"hidden_var_key": "area", "answer_key": "expected_volume", "final_symbol": "V = "},
-    "displacement": {"hidden_var_key": "x", "answer_key": "expected_pe", "final_symbol": "PE = "},
-    "market_cap": {"hidden_var_key": "market_cap", "answer_key": "expected_pe", "final_symbol": "P/E = "},
+    "velocity": {
+        "hidden_var_key": "v",
+        "hidden_symbol": "v",
+        "answer_key": "expected_time",
+        "final_symbol": "t = ",
+    },
+    "current": {
+        "hidden_var_key": "i",
+        "hidden_symbol": "i",
+        "answer_key": "expected_charge",
+        "final_symbol": "Q = ",
+    },
+    "radius": {
+        "hidden_var_key": "r",
+        "hidden_symbol": "r",
+        "answer_key": "expected_circumference",
+        "final_symbol": "C = ",
+    },
+    "side_length": {
+        "hidden_var_key": "s",
+        "hidden_symbol": "s",
+        "answer_key": "expected_surface_area",
+        "final_symbol": "SA = ",
+    },
+    "wavelength": {
+        "hidden_var_key": "wavelength",
+        "hidden_symbol": "wavelength",
+        "answer_key": "expected_distance",
+        "final_symbol": "d = ",
+    },
+    "cross_section": {
+        "hidden_var_key": "area",
+        "hidden_symbol": "area",
+        "answer_key": "expected_volume",
+        "final_symbol": "V = ",
+    },
+    "displacement": {
+        "hidden_var_key": "x",
+        "hidden_symbol": "x",
+        "answer_key": "expected_pe",
+        "final_symbol": "PE = ",
+    },
+    "market_cap": {
+        "hidden_var_key": "market_cap",
+        "hidden_symbol": "market_cap",
+        "answer_key": "expected_pe",
+        "final_symbol": "P/E = ",
+    },
 }
 
 NUM_RE = r"([0-9]+\.?[0-9]*(?:[eE][+-]?[0-9]+)?)"
 SEP = "Answer (step-by-step): "
-APPEND_SUFFIX = " The final answer is "
+APPEND_SUFFIX = " ... The final answer is "
 
 
 def get_clean_generation(trace: dict) -> str:
@@ -119,6 +159,52 @@ def safe_float(v) -> Optional[float]:
         return None
 
 
+def find_assignment_literal(text: str, symbol: str) -> Optional[Tuple[int, int, str]]:
+    """Find last numeric literal in patterns like '<symbol> = <number>'."""
+    if not symbol:
+        return None
+
+    escaped_symbol = re.escape(symbol.strip())
+    pattern = rf"(?<![A-Za-z0-9_]){escaped_symbol}(?![A-Za-z0-9_])\s*=\s*{NUM_RE}"
+    matches = list(re.finditer(pattern, text, re.IGNORECASE))
+    if not matches:
+        return None
+    m = matches[-1]
+    return (m.start(1), m.end(1), m.group(1))
+
+
+def find_hidden_literal(
+    cot_steps: str,
+    cot_full: str,
+    hidden_value: float,
+    hidden_var_key: str,
+    hidden_symbol: str,
+) -> Optional[Tuple[int, int, str]]:
+    """Locate hidden-value literal, preferring explicit variable assignment forms."""
+    symbol_candidates = []
+    for candidate in [hidden_symbol, hidden_var_key]:
+        if candidate and candidate not in symbol_candidates:
+            symbol_candidates.append(candidate)
+
+    # Prefer explicit assignments in the reasoning-only region.
+    for sym in symbol_candidates:
+        occ = find_assignment_literal(cot_steps, sym)
+        if occ is not None:
+            return occ
+
+    # Fallback to full CoT if the answer sentence contains the only assignment.
+    for sym in symbol_candidates:
+        occ = find_assignment_literal(cot_full, sym)
+        if occ is not None:
+            return occ
+
+    # Last-resort numeric matching.
+    occ = find_last_occurrence(cot_steps, hidden_value)
+    if occ is not None:
+        return occ
+    return find_last_occurrence(cot_full, hidden_value)
+
+
 def extract_final_answer(text: str, final_symbol: str) -> Optional[float]:
     """Extract numeric answer from continuation with robust fallback patterns."""
     # Ignore hallucinated follow-on tasks that often begin with another Question.
@@ -149,10 +235,10 @@ def extract_final_answer(text: str, final_symbol: str) -> Optional[float]:
     return None
 
 
-def is_correct(predicted: Optional[float], expected: float, rel_tol: float) -> bool:
-    if predicted is None or expected == 0:
+def is_correct(predicted: Optional[float], expected: float, rel_tol: float, abs_tol: float = 0.0) -> bool:
+    if predicted is None:
         return False
-    return abs(predicted - expected) / abs(expected) <= rel_tol
+    return abs(predicted - expected) <= max(abs_tol, rel_tol * abs(expected))
 
 
 def batched_generate(
@@ -218,7 +304,12 @@ def resolve_base_trace_indices(args, all_traces: List[dict]) -> List[int]:
     return [args.base_trace_idx]
 
 
-def trace_has_hidden_and_answer_literals(trace: dict, hidden_var_key: str, answer_key: str) -> bool:
+def trace_has_hidden_and_answer_literals(
+    trace: dict,
+    hidden_var_key: str,
+    hidden_symbol: str,
+    answer_key: str,
+) -> bool:
     """Check if a trace's CoT text contains parseable hidden and answer literals."""
     hidden = safe_float(trace.get(hidden_var_key))
     answer = safe_float(trace.get(answer_key))
@@ -232,10 +323,14 @@ def trace_has_hidden_and_answer_literals(trace: dict, hidden_var_key: str, answe
     cot = full_text[sep_pos + len(SEP):]
     cot_steps = strip_final_answer_sentence(cot)
 
-    hidden_loc = find_last_occurrence(cot_steps, hidden)
+    hidden_loc = find_hidden_literal(
+        cot_steps=cot_steps,
+        cot_full=cot,
+        hidden_value=hidden,
+        hidden_var_key=hidden_var_key,
+        hidden_symbol=hidden_symbol,
+    )
     answer_loc = find_last_occurrence(cot_steps, answer)
-    if hidden_loc is None:
-        hidden_loc = find_last_occurrence(cot, hidden)
     if answer_loc is None:
         answer_loc = find_last_occurrence(cot, answer)
     return hidden_loc is not None and answer_loc is not None
@@ -245,6 +340,7 @@ def find_fallback_base_index(
     all_traces: List[dict],
     requested_base_idx: int,
     hidden_var_key: str,
+    hidden_symbol: str,
     answer_key: str,
 ) -> Optional[int]:
     """Find a usable base index, preferring same format_id as requested base."""
@@ -257,7 +353,7 @@ def find_fallback_base_index(
     any_fmt = [i for i in range(len(all_traces)) if i != requested_base_idx]
 
     for i in [requested_base_idx] + same_fmt + any_fmt:
-        if trace_has_hidden_and_answer_literals(all_traces[i], hidden_var_key, answer_key):
+        if trace_has_hidden_and_answer_literals(all_traces[i], hidden_var_key, hidden_symbol, answer_key):
             return i
     return None
 
@@ -266,6 +362,7 @@ def run_for_base_trace(
     all_traces: List[dict],
     base_idx: int,
     hidden_var_key: str,
+    hidden_symbol: str,
     answer_key: str,
     final_symbol: str,
     args,
@@ -292,10 +389,14 @@ def run_for_base_trace(
     cot_steps_0 = strip_final_answer_sentence(cot_0)
     cot_words_0 = cot_steps_0.split()
 
-    hidden_loc = find_last_occurrence(cot_steps_0, base_hidden)
+    hidden_loc = find_hidden_literal(
+        cot_steps=cot_steps_0,
+        cot_full=cot_0,
+        hidden_value=base_hidden,
+        hidden_var_key=hidden_var_key,
+        hidden_symbol=hidden_symbol,
+    )
     answer_loc = find_last_occurrence(cot_steps_0, base_answer)
-    if hidden_loc is None:
-        hidden_loc = find_last_occurrence(cot_0, base_hidden)
     if answer_loc is None:
         answer_loc = find_last_occurrence(cot_0, base_answer)
     if hidden_loc is None or answer_loc is None:
@@ -460,7 +561,12 @@ def run_for_base_trace(
         k_results: List[dict] = []
         for var, input_text, continuation in zip(variations, input_texts, continuations):
             predicted = extract_final_answer(continuation, final_symbol)
-            correct = is_correct(predicted, var["expected"], args.relative_tolerance)
+            correct = is_correct(
+                predicted,
+                var["expected"],
+                args.relative_tolerance,
+                args.absolute_tolerance,
+            )
             k_results.append({
                 "base_trace_idx": base_idx,
                 "k": k,
@@ -500,6 +606,7 @@ def run_for_base_trace(
             "match_format_only": args.match_format_only,
             "max_new_tokens": args.max_new_tokens,
             "relative_tolerance": args.relative_tolerance,
+            "absolute_tolerance": args.absolute_tolerance,
         },
         "results_by_k": {str(k): v for k, v in all_results.items()},
     }
@@ -609,11 +716,11 @@ def main() -> None:
     )
     parser.add_argument(
         "--model_path",
-        default="/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B",
+        default="/home/wuroderi/links/projects/def-rgrosse/wuroderi/models/Qwen2.5-32B",
     )
     parser.add_argument(
         "--traces_root",
-        default=os.path.expanduser("~/scratch/reasoning_traces/Qwen2.5-32B"),
+        default=os.path.expanduser("~/links/scratch/reasoning_traces/Qwen2.5-32B"),
     )
     parser.add_argument("--experiment", default="velocity", choices=list(EXPERIMENT_CONFIGS))
     parser.add_argument(
@@ -649,6 +756,12 @@ def main() -> None:
     parser.add_argument("--max_new_tokens", type=int, default=64)
     parser.add_argument("--relative_tolerance", type=float, default=0.05)
     parser.add_argument(
+        "--absolute_tolerance",
+        type=float,
+        default=0.0,
+        help="Absolute tolerance for answer correctness (combined with relative tolerance)",
+    )
+    parser.add_argument(
         "--no_auto_fallback_base",
         action="store_true",
         help="Disable automatic fallback when selected base trace is unparsable",
@@ -656,12 +769,13 @@ def main() -> None:
     parser.add_argument("--dry_run", action="store_true", help="Build diagnostics only; skip model inference")
     parser.add_argument(
         "--output_dir",
-        default="/home/wuroderi/projects/def-zhijing/wuroderi/reasoning_abstraction/intervention_token_results",
+        default="/home/wuroderi/links/projects/def-rgrosse/wuroderi/reasoning_abstraction/intervention_token_results",
     )
     args = parser.parse_args()
 
     cfg = EXPERIMENT_CONFIGS[args.experiment]
     hidden_var_key = cfg["hidden_var_key"]
+    hidden_symbol = cfg.get("hidden_symbol", hidden_var_key)
     answer_key = cfg["answer_key"]
     final_symbol = cfg["final_symbol"]
 
@@ -680,10 +794,13 @@ def main() -> None:
     print(f"Experiment         : {args.experiment}")
     print(f"Hidden var key     : {hidden_var_key}")
     print(f"Answer key         : {answer_key}")
+    print(f"Hidden symbol      : {hidden_symbol}")
     print(f"Base trace indices : {base_indices}")
     print(f"Requested variants : {args.n_variations}")
     print(f"Match format only  : {args.match_format_only}")
     print(f"Dry run            : {args.dry_run}")
+    print(f"Relative tolerance : {args.relative_tolerance}")
+    print(f"Absolute tolerance : {args.absolute_tolerance}")
     print(f"Model              : {args.model_path}")
     print(f"Output             : {output_dir}")
     print()
@@ -712,7 +829,12 @@ def main() -> None:
 
     for requested_base_idx in base_indices:
         base_idx = requested_base_idx
-        if not trace_has_hidden_and_answer_literals(all_traces[base_idx], hidden_var_key, answer_key):
+        if not trace_has_hidden_and_answer_literals(
+            all_traces[base_idx],
+            hidden_var_key,
+            hidden_symbol,
+            answer_key,
+        ):
             if args.no_auto_fallback_base:
                 raise RuntimeError(
                     f"Base trace {base_idx} is unparsable and --no_auto_fallback_base is set"
@@ -721,6 +843,7 @@ def main() -> None:
                 all_traces=all_traces,
                 requested_base_idx=base_idx,
                 hidden_var_key=hidden_var_key,
+                hidden_symbol=hidden_symbol,
                 answer_key=answer_key,
             )
             if fallback is None:
@@ -737,6 +860,7 @@ def main() -> None:
             all_traces=all_traces,
             base_idx=base_idx,
             hidden_var_key=hidden_var_key,
+            hidden_symbol=hidden_symbol,
             answer_key=answer_key,
             final_symbol=final_symbol,
             args=args,

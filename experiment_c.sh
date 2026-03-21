@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=exp_c_%j
-#SBATCH --time=0-4:00:00
+#SBATCH --time=0-8:00:00
 #SBATCH --account=def-rgrosse
 #SBATCH --mem=128G
 #SBATCH --gpus-per-node=h100:1

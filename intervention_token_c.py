@@ -164,8 +164,8 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("--experiment", required=True, choices=list(EXPERIMENT_CONFIGS))
 parser.add_argument("--n_traces", type=int, default=None)
-parser.add_argument("--model_path", default="/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B")
-parser.add_argument("--traces_root", default=os.path.expanduser("~/scratch/reasoning_traces/Qwen2.5-32B"))
+parser.add_argument("--model_path", default="/home/wuroderi/links/projects/def-rgrosse/wuroderi/models/Qwen2.5-32B")
+parser.add_argument("--traces_root", default=os.path.expanduser("~/links/scratch/reasoning_traces/Qwen2.5-32B"))
 parser.add_argument("--blocks", nargs="+", default=["censoring_masking", "value_patching", "truncation", "baseline"],
                     choices=list(CONDITION_GROUPS))
 parser.add_argument("--conditions", nargs="+", default=None,
@@ -195,7 +195,7 @@ TOP_P = 1.0
 RELATIVE_TOLERANCE = 0.05
 
 OUTPUT_DIR = Path(
-    "/home/wuroderi/projects/def-zhijing/wuroderi/reasoning_abstraction"
+    "/home/wuroderi/links/projects/def-rgrosse/wuroderi/reasoning_abstraction"
     "/intervention_token_results"
 )
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
@@ -334,8 +334,8 @@ def canonical_trace_text(trace: dict) -> Optional[str]:
     return prompt + generated_text
 
 
-def extract_written_hidden_var(text: str) -> Optional[Tuple[int, int, float, str]]:
-    """Find the last written hidden-variable value span in the first-problem text."""
+def extract_written_hidden_var(text: str, start_idx: int = 0) -> Optional[Tuple[int, int, float, str]]:
+    """Find the first written hidden-variable value span in the first-problem text."""
     matches: List[Tuple[int, int, float, str]] = []
 
     for pattern in FORWARD_VAR_PATTERNS:
@@ -346,6 +346,8 @@ def extract_written_hidden_var(text: str) -> Optional[Tuple[int, int, float, str
                 continue
             start = match.start(1)
             end = match.end(1)
+            if start < start_idx:
+                continue
             matches.append((start, end, value, number))
 
     for pattern in REVERSE_VAR_PATTERNS:
@@ -356,11 +358,13 @@ def extract_written_hidden_var(text: str) -> Optional[Tuple[int, int, float, str
                 continue
             start = match.start(1)
             end = match.end(1)
+            if start < start_idx:
+                continue
             matches.append((start, end, value, number))
 
     if matches:
         matches.sort(key=lambda item: item[0])
-        return matches[-1]
+        return matches[0]
 
     return None
 
@@ -378,7 +382,20 @@ def get_text_up_to_hidden_var(trace: dict) -> Optional[Tuple[str, float]]:
     jump_idx = first_problem_text.find(JUMP_TO_SYMBOL)
     search_text = first_problem_text[:jump_idx] if jump_idx != -1 else first_problem_text
 
-    written = extract_written_hidden_var(search_text)
+    # Prefer matches that occur after CoT starts to avoid latching onto earlier
+    # prompt numerals or late malformed placeholder text.
+    cot_start = 0
+    cot_match = re.search(r"Answer\s*\(step-by-step\)\s*:", search_text, re.IGNORECASE)
+    if cot_match:
+        cot_start = cot_match.end()
+
+    if metadata_hv is not None:
+        hv_occ = [m for m in find_all_occurrences(search_text, metadata_hv) if m[0] >= cot_start]
+        if hv_occ:
+            _, end, _ = hv_occ[0]
+            return search_text[:end], metadata_hv
+
+    written = extract_written_hidden_var(search_text, start_idx=cot_start)
     if written is not None:
         _, end, written_hv, _ = written
         return search_text[:end], written_hv
@@ -386,11 +403,11 @@ def get_text_up_to_hidden_var(trace: dict) -> Optional[Tuple[str, float]]:
     if metadata_hv is None:
         return None
 
-    loc = find_last_occurrence(search_text, metadata_hv)
-    if loc is None:
+    all_occ = find_all_occurrences(search_text, metadata_hv)
+    if not all_occ:
         return None
 
-    _, end, _ = loc
+    _, end, _ = all_occ[0]
     return search_text[:end], metadata_hv
 
 
@@ -414,19 +431,48 @@ def extract_final_answer(text: str, truncate: bool = True) -> Optional[float]:
             s = matches[-1].group(1).lower()
             return float("-inf") if s.startswith("-") else float("inf")
 
-    patterns = [
-        rf"{re.escape(JUMP_TO_SYMBOL.strip())}\s*([0-9]+\.?[0-9]*(?:[eE][+-]?[0-9]+)?)",
-        r"(?:answer|result|final|therefore).*?([0-9]+\.?[0-9]*(?:[eE][+-]?[0-9]+)?)",
-        r"answer is\s+([0-9]+\.?[0-9]*)",
-        r"=\s*([0-9]+\.?[0-9]*(?:[eE][+-]?[0-9]+)?)\s*$",
-    ]
-    for pattern in patterns:
-        matches = list(re.finditer(pattern, text, re.IGNORECASE | re.MULTILINE))
-        if matches:
-            try:
-                return float(matches[-1].group(1))
-            except (ValueError, IndexError):
-                continue
+    num_pat = r'-?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?'
+
+    # Priority 1: explicit JUMP_TO_SYMBOL marker
+    jump_pat = rf"{re.escape(JUMP_TO_SYMBOL.strip())}\s*({num_pat})"
+    matches = list(re.finditer(jump_pat, text, re.IGNORECASE))
+    if matches:
+        try:
+            return float(matches[-1].group(1))
+        except (ValueError, IndexError):
+            pass
+
+    # Priority 2: "answer is [approximately] X" — exact phrase avoids grabbing
+    # intermediate numbers (the old .*? pattern was matching the first number
+    # after keywords like "therefore", not the final answer value).
+    ans_pat = rf'(?:the\s+)?answer\s+is\s*(?:approximately\s+)?({num_pat})'
+    matches = list(re.finditer(ans_pat, text, re.IGNORECASE))
+    if matches:
+        try:
+            return float(matches[-1].group(1))
+        except (ValueError, IndexError):
+            pass
+
+    # Priority 3: near end of text — "= X <unit>" or "is X <unit>"
+    # Catches outputs like "t = 69 / 94.2 = 0.732 seconds. Therefore, ..."
+    tail = text[-400:]
+    unit_pat = rf'(?:=|≈|is)\s*(?:approximately\s+)?({num_pat})\s*[a-zA-Z/]+(?:\b|$)'
+    matches = list(re.finditer(unit_pat, tail, re.IGNORECASE))
+    if matches:
+        try:
+            return float(matches[-1].group(1))
+        except (ValueError, IndexError):
+            pass
+
+    # Priority 4: last number on the final line (broadest fallback)
+    last_line = text.rstrip().rsplit('\n', 1)[-1]
+    matches = list(re.finditer(num_pat, last_line))
+    if matches:
+        try:
+            return float(matches[-1].group())
+        except (ValueError, IndexError):
+            pass
+
     return None
 
 

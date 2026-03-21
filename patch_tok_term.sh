@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=reasoning_abstraction_generate_data
-#SBATCH --time=0-4:00:00 # D-HH:MM
+#SBATCH --time=0-6:00:00 # D-HH:MM
 #SBATCH --account=def-rgrosse
 #SBATCH --mem=128G
 #SBATCH --gpus-per-node=h100:1
@@ -21,4 +21,4 @@ pip install -e ../TransformerLens
 
 EXPERIMENT=${1:-velocity}
 
-python cot_early_termination.py --experiment "${EXPERIMENT}" --n_variations 100
+python cot_early_termination.py --experiment "${EXPERIMENT}" --n_variations 100 --base_trace_indices 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19

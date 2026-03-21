@@ -1,16 +1,15 @@
 block,condition,success_n,real_accuracy,patch_accuracy,moved_toward_patch_rate,mean_patch_effect,description
-baseline,unmod_cot,200,0.530000,,,,Unmodified CoT baseline
-censoring_masking,blank,157,0.598726,0.000000,nan,nan,Remove v value entirely
-censoring_masking,whitespace,157,0.522293,0.000000,nan,nan,Replace v with spaces
-censoring_masking,underscores,157,0.248408,0.000000,nan,nan,Replace v with underscores
-censoring_masking,redacted,157,0.350318,0.000000,nan,nan,Replace hidden value with [REDACTED]
-censoring_masking,variable,157,0.280255,0.000000,nan,nan,Replace hidden value with $VELOCITY
-value_patching,patch_from_trace,157,0.038217,0.535032,0.788462,0.557133,Patch hidden value from another trace
-value_patching,patch_zero,157,0.114650,0.000000,nan,nan,Patch hidden value to 0
-value_patching,patch_pos_inf,157,0.089172,0.012739,0.156250,0.152198,Patch hidden value to infinity token
-value_patching,patch_neg_inf,157,0.095541,0.012739,0.125000,0.137123,Patch hidden value to negative infinity token
-value_patching,patch_large_random,157,0.025478,0.452229,0.655844,0.653745,Patch hidden value to random int in [1000,10000]
-truncation,jump_to_final,157,0.484076,0.000000,nan,nan,Truncate before hidden value, append 't = '
-truncation,jump_to_answer,157,0.000000,0.000000,nan,nan,Truncate before hidden value, append '
-The answer is '
-baseline,no_cot,157,0.165605,0.000000,nan,nan,No chain-of-thought prompt baseline
+baseline,unmod_cot,200,0.555000,,,,Unmodified CoT baseline
+censoring_masking,blank,157,0.624204,0.000000,nan,nan,Remove v value entirely
+censoring_masking,whitespace,157,0.560510,0.000000,nan,nan,Replace v with spaces
+censoring_masking,underscores,157,0.133758,0.000000,nan,nan,Replace v with underscores
+censoring_masking,redacted,157,0.305732,0.000000,nan,nan,Replace hidden value with [REDACTED]
+censoring_masking,variable,157,0.108280,0.000000,nan,nan,Replace hidden value with $VELOCITY
+value_patching,patch_from_trace,157,0.044586,0.783439,0.878981,0.815447,Patch hidden value from another trace
+value_patching,patch_zero,157,0.222930,0.000000,nan,nan,Patch hidden value to 0
+value_patching,patch_pos_inf,157,0.235669,0.031847,0.155172,0.146406,Patch hidden value to infinity token
+value_patching,patch_neg_inf,157,0.216561,0.019108,0.071429,0.076168,Patch hidden value to negative infinity token
+value_patching,patch_large_random,157,0.095541,0.579618,0.821656,0.816607,Patch hidden value to random int in [1000,10000]
+truncation,jump_to_final,157,0.541401,0.000000,nan,nan,Truncate before hidden value, append '... t = '
+truncation,jump_to_answer,157,0.070064,0.000000,nan,nan,Truncate before hidden value, append '... The answer is '
+baseline,no_cot,157,0.184713,0.000000,nan,nan,No chain-of-thought prompt baseline

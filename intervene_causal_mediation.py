@@ -32,10 +32,10 @@ from typing import List, Tuple, Optional, Dict
 # CONFIGURATION
 # ==========================================
 
-MODEL_PATH = "/home/wuroderi/projects/def-zhijing/wuroderi/models/Qwen2.5-32B"
-TRACES_DIR = Path("/home/wuroderi/scratch/reasoning_traces/Qwen2.5-32B/velocity")
+MODEL_PATH = "/home/wuroderi/links/projects/def-rgrosse/wuroderi/models/Qwen2.5-32B"
+TRACES_DIR = Path("/home/wuroderi/links/scratch/reasoning_traces/Qwen2.5-32B/velocity")
 TRACES_METADATA_FILE = TRACES_DIR / "traces_metadata.json"
-OUTPUT_DIR = Path("/home/wuroderi/scratch/causal_plots")
+OUTPUT_DIR = Path("/home/wuroderi/links/scratch/causal_plots")
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 
 # Experiment Configuration
